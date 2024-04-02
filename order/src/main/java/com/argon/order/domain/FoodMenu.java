@@ -24,6 +24,15 @@ public class FoodMenu {
     @Column(name = "FOOD_MENU_PRICE", columnDefinition = "INT", nullable = false)
     private String foodMenuPrice;
 
+    @Column(name = "MENU_CATEGORY", columnDefinition = "VARCHAR(20)", nullable = false)
+    private String menuCategory;
+
+    @Column(name = "POPULAR_AT", columnDefinition = "VARCHAR(1)", nullable = false)
+    private String popularAt;
+
+    @Column(name = "IS_FEATURED", columnDefinition = "VARCHAR(10)", nullable = false)
+    private String isFeatured;
+
     @Column(name = "FOOD_IMG_NAME", columnDefinition = "VARCHAR(100)", nullable = false)
     private String foodImgName;
 
