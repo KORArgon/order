@@ -30,8 +30,8 @@ public class FoodMenu {
     @Column(name = "POPULAR_AT", columnDefinition = "VARCHAR(1)", nullable = false)
     private String popularAt;
 
-    @Column(name = "IS_FEATURED", columnDefinition = "VARCHAR(10)", nullable = false)
-    private String isFeatured;
+    @Column(name = "FOOD_MENU_TITLE", columnDefinition = "VARCHAR(20)", nullable = false)
+    private String foodMenuTitle;
 
     @Column(name = "FOOD_IMG_NAME", columnDefinition = "VARCHAR(100)", nullable = false)
     private String foodImgName;
