@@ -1,15 +1,12 @@
 package com.argon.order.service;
 
-import com.argon.order.Util.DateUtil;
+import com.argon.order.util.DateUtil;
 import com.argon.order.domain.Member;
 import com.argon.order.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,8 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @Slf4j
@@ -30,16 +25,19 @@ public class MemberService implements UserDetailsService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
+    private MessageService messageService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = new Member();
-        member.setMemberId(username);
-        member = memberRepository.findByMemberId(member.getMemberId());
+        Member member = memberRepository.findByMemberId(username);
         if(member != null){
-            List<GrantedAuthority> authorities = new ArrayList();
-            return new User(member.getMemberId(), member.getPassword(), authorities);
+            return User.builder()
+                    .username(member.getMemberId())
+                    .password(member.getPassword())
+                    .roles(member.getGrade())
+                    .build();
         }
-        return null;
+        throw new UsernameNotFoundException("해당 사용자를 찾을 수 없습니다.");
     }
 
     /**
