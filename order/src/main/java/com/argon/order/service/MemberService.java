@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,9 +37,7 @@ public class MemberService implements UserDetailsService {
         member = memberRepository.findByMemberId(member.getMemberId());
         if(member != null){
             List<GrantedAuthority> authorities = new ArrayList();
-            System.out.println("password1 : "+member.getPassword());
-            System.out.println("password2 : "+passwordEncoder.encode(member.getPassword()));
-            return new User(member.getMemberId(), passwordEncoder.encode(member.getPassword()), authorities);
+            return new User(member.getMemberId(), member.getPassword(), authorities);
         }
         return null;
     }
