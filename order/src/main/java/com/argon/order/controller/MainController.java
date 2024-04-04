@@ -10,17 +10,17 @@ public class MainController {
 
     @GetMapping("/")
     public String index(){
-        return "redirect:/admin/main";
+        return "redirect:/main";
     }
 
-    @GetMapping("/admin/main")
+    @GetMapping("/main")
     public String main(){
         return "/admin/main";
     }
 
     @GetMapping("/loginForm")
     public String loginForm(){
-        return "/login/loginForm";
+        return "/login/loginView";
     }
 
 }
