@@ -14,7 +14,6 @@ import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/admin")
 public class MemberController {
 
     // memberService
