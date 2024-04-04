@@ -7,13 +7,20 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
+
+    @Bean
+    AuthenticationFailureHandler customAuthFailureHandler(){
+        return new CustomAuthFailureHandler();
+    }
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
@@ -32,16 +39,17 @@ public class SecurityConfig {
         http
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(requests -> requests
-                    .requestMatchers("/", "/login", "/join","/loginProcess").permitAll()
+                    .requestMatchers("/", "/login", "/join").permitAll()
                     .anyRequest().authenticated()
             )
             .formLogin(form -> form
                     .loginPage("/loginForm")
                     .loginProcessingUrl("/login")
                     .defaultSuccessUrl("/", true)
+                    .failureHandler(customAuthFailureHandler())
                     .permitAll()
             )
-            .logout(logout -> logout.permitAll());
+            .logout(LogoutConfigurer::permitAll);
 
         return http.build();
     }
