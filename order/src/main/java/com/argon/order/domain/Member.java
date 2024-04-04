@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name="NT_MEMBER")
-public class Member extends Common {
+public class Member {
 
     @Id
     @Column(name = "MEMBER_ID", nullable = false)
