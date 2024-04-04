@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Page</title>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+<th:block th:include="/.include/menu.html"></th:block>
+<div class="container">
+    <h2>메뉴 목록</h2>
+    <table class="item-table">
+        <thead>
+        <tr>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Item 1</td>
+            <td>Description for Item 1</td>
+            <td>$10.00</td>
+        </tr>
+        <tr>
+            <td>Item 2</td>
+            <td>Description for Item 2</td>
+            <td>$15.00</td>
+        </tr>
+        <tr>
+            <td>Item 3</td>
+            <td>Description for Item 3</td>
+            <td>$20.00</td>
+        </tr>
+        <!-- Add more items as needed -->
+        </tbody>
+    </table>
+    <div class="buttons">
+        <button onclick="location.href='./foodMenuRegistForm'">등록</button>
+    </div>
+</div>
+</body>
+</html>

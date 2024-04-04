@@ -13,7 +13,7 @@ public class FoodMenu {
     @Id
     @Column(name = "FOOD_MENU_NO", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int foodMenuNo;
+    private Long foodMenuNo;
 
     @Column(name = "RESTAURANT_ID", columnDefinition = "VARCHAR(100)")
     private String restaurantId;
