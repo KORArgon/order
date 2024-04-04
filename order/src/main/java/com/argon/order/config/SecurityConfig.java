@@ -32,11 +32,12 @@ public class SecurityConfig {
         http
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(requests -> requests
-                    .requestMatchers("/", "/login", "/join").permitAll()
+                    .requestMatchers("/", "/login", "/join","/loginProcess").permitAll()
                     .anyRequest().authenticated()
             )
             .formLogin(form -> form
-//                    .loginPage("/login")
+                    .loginPage("/loginForm")
+                    .loginProcessingUrl("/login")
                     .defaultSuccessUrl("/", true)
                     .permitAll()
             )
