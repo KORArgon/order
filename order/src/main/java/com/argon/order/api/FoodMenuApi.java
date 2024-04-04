@@ -1,8 +1,9 @@
-package com.argon.order.controller;
+package com.argon.order.api;
 
 import com.argon.order.domain.FoodMenu;
 import com.argon.order.service.FoodMenuService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,14 +11,13 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class FoodMenuApiController {
+public class FoodMenuApi {
 
     // foodMenuService
     private final FoodMenuService foodMenuService;
 
     @GetMapping("/foodMenu/foodMenuListApi")
-    public List<FoodMenu> foodMenuListApi(String restaurantId){
-        return foodMenuService.findByRestaurantId(restaurantId);
+    public ResponseEntity<Object> foodMenuListApi(String restaurantId) {
+        return ResponseEntity.ok(foodMenuService.findByRestaurantId(restaurantId));
     }
-
 }
