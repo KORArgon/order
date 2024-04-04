@@ -1,6 +1,6 @@
 package com.argon.order.controller;
 
-import com.argon.order.Util.PagingUtil;
+import com.argon.order.util.PagingUtil;
 import com.argon.order.domain.FoodMenu;
 import com.argon.order.service.FoodMenuService;
 import com.argon.order.service.MessageService;

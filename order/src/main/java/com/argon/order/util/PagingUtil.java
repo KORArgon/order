@@ -1,4 +1,4 @@
-package com.argon.order.Util;
+package com.argon.order.util;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

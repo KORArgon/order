@@ -1,4 +1,4 @@
-package com.argon.order.Util;
+package com.argon.order.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
