@@ -4,10 +4,9 @@
         <th:block th:if="${loginMap.loginGrade == 'ADMIN'}">
             <a href="./memberRegistForm">사용자 관리</a>
         </th:block>
-        <th:block th:if="${loginMap.loginGrade == 'STAFF'}">
-            <a href="./foodMenuListForm">메뉴 관리</a>
-            <a href="./orderHistoryListForm">주문내역 관리</a>
-        </th:block>
+        <a href="./restaurantListForm">상점 관리</a>
+        <a href="./foodMenuListForm">메뉴 관리</a>
+        <a href="./orderHistoryListForm">주문내역 관리</a>
     </div>
     <div class="logout">
         <span th:text="${loginMap.loginName}">님</span>
