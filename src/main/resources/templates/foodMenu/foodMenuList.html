@@ -11,30 +11,36 @@
 <div class="container">
     <h2>메뉴 목록</h2>
     <table class="item-table">
+        <colgroup>
+            <col width="5">
+            <col width="70%"/>
+            <col width="10%"/>
+            <col width="5%"/>
+            <col width="5%"/>
+            <col width="5%"/>
+        </colgroup>
         <thead>
         <tr>
-            <th>Item</th>
-            <th>Description</th>
-            <th>Price</th>
+            <th>번호</th>
+            <th>메뉴명</th>
+            <th>가격</th>
+            <th colspan="3">관리</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>Item 1</td>
-            <td>Description for Item 1</td>
-            <td>$10.00</td>
+        <tr th:each="foodMenu : ${foodMenuList}">
+            <td th:text="${foodMenu.foodMenuNo}"></td>
+            <td th:text="${foodMenu.foodMenuNm}"></td>
+            <td th:text="${foodMenu.foodMenuPrice}"></td>
+            <td><a class="btn_s" th:href="@{/weather/weatherViewForm(foodMenu=${foodMenu.foodMenuNo})}">보기</a></td>
+            <td><a class="btn_s" th:href="@{/weather/weatherUpdateForm(foodMenu=${foodMenu.foodMenuNo})}">수정</a></td>
+            <td>
+                <form id="delete_form" th:action="@{/weather/weatherDelete(foodMenu=${foodMenu.foodMenuNo})}" method="post">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <input type="submit" class="btn_s" value="삭제">
+                </form>
+            </td>
         </tr>
-        <tr>
-            <td>Item 2</td>
-            <td>Description for Item 2</td>
-            <td>$15.00</td>
-        </tr>
-        <tr>
-            <td>Item 3</td>
-            <td>Description for Item 3</td>
-            <td>$20.00</td>
-        </tr>
-        <!-- Add more items as needed -->
         </tbody>
     </table>
     <div class="buttons">
