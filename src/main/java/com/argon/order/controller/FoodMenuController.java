@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
 @RequiredArgsConstructor
@@ -69,8 +70,8 @@ public class FoodMenuController {
      * @return
      */
     @PostMapping("/foodMenuRegist")
-    public String foodMenuRegist(FoodMenu foodMenu, Model model){
-        foodMenuService.save(foodMenu);
+    public String foodMenuRegist(FoodMenu foodMenu, Model model, MultipartHttpServletRequest request){
+        foodMenuService.save(foodMenu, request);
         return messageService.redirectMessage(model, "등록을 완료했습니다.", "/foodMenu/foodMenuListForm");
     }
 
@@ -94,8 +95,8 @@ public class FoodMenuController {
      * @return
      */
     @PutMapping("/foodMenu/foodMenuUpdate")
-    public String foodMenuUpdate(FoodMenu foodMenu, Model model){
-        foodMenuService.save(foodMenu);
+    public String foodMenuUpdate(FoodMenu foodMenu, Model model, MultipartHttpServletRequest request){
+        foodMenuService.save(foodMenu, request);
         return messageService.redirectMessage(model, "수정을 완료했습니다.", "/foodMenu/foodMenuListForm");
     }
 

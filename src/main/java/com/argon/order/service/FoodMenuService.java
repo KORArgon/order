@@ -2,10 +2,13 @@ package com.argon.order.service;
 
 import com.argon.order.domain.FoodMenu;
 import com.argon.order.repository.FoodMenuRepository;
+import com.argon.order.util.DateUtil;
+import com.argon.order.util.LoginUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.List;
 
@@ -43,8 +46,17 @@ public class FoodMenuService {
      * 등록 및 수정 처리
      * @param foodMenu
      */
-    public void save(FoodMenu foodMenu) {
+    public void save(FoodMenu foodMenu, MultipartHttpServletRequest request) {
+        if(foodMenu.getFoodMenuNo() == null || foodMenu.getFoodMenuNo() == 0){
+            foodMenu.setRegistDate(DateUtil.getTodateTime());
+            foodMenu.setRegistId(LoginUtil.getLoingId());
+        }   else {
+            foodMenu.setUpdateDate(DateUtil.getTodateTime());
+            foodMenu.setUpdateId(LoginUtil.getLoingId());
+        }
+
         foodMenuRepository.save(foodMenu);
+
     }
 
     /**
