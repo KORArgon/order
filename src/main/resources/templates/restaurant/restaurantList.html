@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Page</title>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+<th:block th:include="/.include/menu.html"></th:block>
+<div class="container">
+    <h2>메뉴 목록</h2>
+    <table class="item-table">
+        <colgroup>
+            <col width="5">
+            <col width="70%"/>
+            <col width="10%"/>
+            <col width="5%"/>
+            <col width="5%"/>
+            <col width="5%"/>
+        </colgroup>
+        <thead>
+        <tr>
+            <th>식당명</th>
+            <th>가격</th>
+            <th colspan="3">관리</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="restaurant : ${restaurantList}">
+            <td th:text="${restaurant.restaurantNm}"></td>
+            <td th:text="${restaurant.restaurantPrice}"></td>
+            <td><a class="btn_s" th:href="@{/weather/weatherViewForm(restaurant=${restaurant.restaurantId})}">보기</a></td>
+            <td><a class="btn_s" th:href="@{/weather/weatherUpdateForm(restaurant=${restaurant.restaurantId})}">수정</a></td>
+            <td>
+                <form id="delete_form" th:action="@{/weather/weatherDelete(restaurant=${restaurant.restaurantId})}" method="post">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <input type="submit" class="btn_s" value="삭제">
+                </form>
+            </td>
+        </tr>
+        <th:block th:if="${#lists.size(restaurantList) == 0}">
+            <tr>
+                <td colspan="5">결과가 없습니다.0</td>
+            </tr>
+        </th:block>
+        <th:block th:if="${#lists.size(restaurantList) == 1}">
+            <tr>
+                <td colspan="5">결과가 없습니다1.</td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <div class="buttons">
+        <button onclick="location.href='./restaurantRegistForm'">등록</button>
+    </div>
+</div>
+</body>
+</html>

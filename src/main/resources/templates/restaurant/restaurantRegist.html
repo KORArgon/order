@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+<th:block th:include="/.include/menu.html"></th:block>
+<div class="container">
+    <h2>메뉴 등록</h2>
+    <form id="restaurantRegistForm" name="restaurantRegistForm" action="./restaurantRegist" method="post">
+        <div class="form-group">
+            <label for="restaurantNm">메뉴명:</label>
+            <input type="text" id="restaurantNm" name="restaurantId" required>
+        </div>
+        <div class="form-group">
+            <label for="restaurantPrice">메뉴가격:</label>
+            <input type="text" id="restaurantPrice" name="restaurantId" required>
+        </div>
+        <div class="form-group">
+            <label for="menuCategory">메뉴카테고리:</label>
+            <input type="text" id="menuCategory" name="restaurantId" required>
+        </div>
+        <div class="form-group">
+            <label for="popularAt">인기메뉴 여부:</label>
+            <input type="text" id="popularAt" name="restaurantId" required>
+        </div>
+        <div class="form-group">
+            <label>메뉴 이미지:</label>
+            <label for="fileInput" class="file-label">파일 업로드</label>
+            <input type="file" id="fileInput" class="file-input" onchange="displayFileName()">
+            <span id="fileName">선택된 파일 없음</span>
+        </div>
+        <button type="submit">등록</button>
+    </form>
+</div>
+<script>
+    function displayFileName() {
+        const fileInput = document.getElementById('fileInput');
+        const fileNameDisplay = document.getElementById('fileName');
+        const fileName = fileInput.files[0].name;
+        fileNameDisplay.textContent = fileName;
+    }
+</script>
+</body>
+</html>
