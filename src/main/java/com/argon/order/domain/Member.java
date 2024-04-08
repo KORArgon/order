@@ -14,9 +14,6 @@ public class Member {
     @Column(name = "MEMBER_ID", nullable = false)
     private String memberId;
 
-    @Column(name = "RESTAURANT_ID", columnDefinition = "VARCHAR(100)")
-    private String restaurantId;
-
     @Column(name = "PASSWORD", columnDefinition = "VARCHAR(200)", nullable = false)
     private String password;
 
