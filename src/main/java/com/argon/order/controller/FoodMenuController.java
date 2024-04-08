@@ -4,6 +4,7 @@ import com.argon.order.util.PagingUtil;
 import com.argon.order.domain.FoodMenu;
 import com.argon.order.service.FoodMenuService;
 import com.argon.order.service.MessageService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
@@ -70,7 +72,7 @@ public class FoodMenuController {
      * @return
      */
     @PostMapping("/foodMenuRegist")
-    public String foodMenuRegist(FoodMenu foodMenu, Model model, MultipartHttpServletRequest request){
+    public String foodMenuRegist(FoodMenu foodMenu, Model model, HttpServletRequest request, MultipartFile file){
         foodMenuService.save(foodMenu, request);
         return messageService.redirectMessage(model, "등록을 완료했습니다.", "/foodMenu/foodMenuListForm");
     }
@@ -95,7 +97,7 @@ public class FoodMenuController {
      * @return
      */
     @PutMapping("/foodMenu/foodMenuUpdate")
-    public String foodMenuUpdate(FoodMenu foodMenu, Model model, MultipartHttpServletRequest request){
+    public String foodMenuUpdate(FoodMenu foodMenu, Model model, HttpServletRequest request, MultipartFile file){
         foodMenuService.save(foodMenu, request);
         return messageService.redirectMessage(model, "수정을 완료했습니다.", "/foodMenu/foodMenuListForm");
     }
