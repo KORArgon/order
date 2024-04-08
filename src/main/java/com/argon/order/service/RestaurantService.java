@@ -46,8 +46,9 @@ public class RestaurantService {
      * 등록 및 수정 처리
      * @param restaurant
      */
-    public void save(Restaurant restaurant, HttpServletRequest request) {
-        if(restaurant.getRestaurantId() == null || restaurant.getRestaurantId().equals("")){
+    public void save(Restaurant restaurant) {
+        if(restaurantRepository.findByRestaurantId(restaurant.getRestaurantId()) == null){
+            String restaurantId = DateUtil.getTodateTime();
             restaurant.setRegistDate(DateUtil.getTodateTime());
             restaurant.setRegistId(LoginUtil.getLoingId());
         }   else {

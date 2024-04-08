@@ -71,8 +71,8 @@ public class RestaurantController {
      * @return
      */
     @PostMapping("/restaurantRegist")
-    public String restaurantRegist(Restaurant restaurant, Model model, HttpServletRequest request, MultipartFile file){
-        restaurantService.save(restaurant, request);
+    public String restaurantRegist(Restaurant restaurant, Model model){
+        restaurantService.save(restaurant);
         return messageService.redirectMessage(model, "등록을 완료했습니다.", "/restaurant/restaurantListForm");
     }
 
@@ -96,8 +96,8 @@ public class RestaurantController {
      * @return
      */
     @PutMapping("/restaurant/restaurantUpdate")
-    public String restaurantUpdate(Restaurant restaurant, Model model, HttpServletRequest request, MultipartFile file){
-        restaurantService.save(restaurant, request);
+    public String restaurantUpdate(Restaurant restaurant, Model model){
+        restaurantService.save(restaurant);
         return messageService.redirectMessage(model, "수정을 완료했습니다.", "/restaurant/restaurantListForm");
     }
 
