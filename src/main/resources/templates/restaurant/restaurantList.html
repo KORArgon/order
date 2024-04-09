@@ -9,7 +9,7 @@
 <body>
 <th:block th:include="/.include/menu.html"></th:block>
 <div class="container">
-    <h2>메뉴 목록</h2>
+    <h2>식당 목록</h2>
     <table class="item-table">
         <colgroup>
             <col width="5">
@@ -17,24 +17,21 @@
             <col width="10%"/>
             <col width="5%"/>
             <col width="5%"/>
-            <col width="5%"/>
         </colgroup>
         <thead>
         <tr>
             <th>식당명</th>
             <th>가격</th>
-            <th colspan="3">관리</th>
+            <th colspan="2">관리</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="restaurant : ${restaurantList}">
             <td th:text="${restaurant.restaurantNm}"></td>
-            <td th:text="${restaurant.restaurantPrice}"></td>
-            <td><a class="btn_s" th:href="@{/weather/weatherViewForm(restaurant=${restaurant.restaurantId})}">보기</a></td>
-            <td><a class="btn_s" th:href="@{/weather/weatherUpdateForm(restaurant=${restaurant.restaurantId})}">수정</a></td>
+            <td><a class="btn_s" th:href="@{/restaurantViewForm(restaurant=${restaurant.restaurantId})}">보기</a></td>
+            <td><a class="btn_s" th:href="@{/restaurantUpdateForm(restaurant=${restaurant.restaurantId})}">수정</a></td>
             <td>
-                <form id="delete_form" th:action="@{/weather/weatherDelete(restaurant=${restaurant.restaurantId})}" method="post">
-                    <input type="hidden" name="_method" value="delete"/>
+                <form id="delete_form" th:action="@{/restaurantDelete(restaurant=${restaurant.restaurantId})}">
                     <input type="submit" class="btn_s" value="삭제">
                 </form>
             </td>

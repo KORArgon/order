@@ -47,8 +47,10 @@ public class RestaurantService {
      * @param restaurant
      */
     public void save(Restaurant restaurant) {
-        if(restaurantRepository.findByRestaurantId(restaurant.getRestaurantId()) == null){
+        restaurant.setMemberId(LoginUtil.getLoingId());
+        if(restaurantRepository.findByRestaurantId(restaurant.getRestaurantId()).size() == 0){
             String restaurantId = DateUtil.getTodateTime();
+            restaurant.setRestaurantId(restaurantId);
             restaurant.setRegistDate(DateUtil.getTodateTime());
             restaurant.setRegistId(LoginUtil.getLoingId());
         }   else {

@@ -73,7 +73,7 @@ public class RestaurantController {
     @PostMapping("/restaurantRegist")
     public String restaurantRegist(Restaurant restaurant, Model model){
         restaurantService.save(restaurant);
-        return messageService.redirectMessage(model, "등록을 완료했습니다.", "/restaurant/restaurantListForm");
+        return messageService.redirectMessage(model, "등록을 완료했습니다.", "/restaurantListForm");
     }
 
     /**
@@ -95,10 +95,10 @@ public class RestaurantController {
      * @param model
      * @return
      */
-    @PutMapping("/restaurant/restaurantUpdate")
+    @PutMapping("/restaurantUpdate")
     public String restaurantUpdate(Restaurant restaurant, Model model){
         restaurantService.save(restaurant);
-        return messageService.redirectMessage(model, "수정을 완료했습니다.", "/restaurant/restaurantListForm");
+        return messageService.redirectMessage(model, "수정을 완료했습니다.", "/restaurantListForm");
     }
 
     /**
@@ -107,7 +107,7 @@ public class RestaurantController {
      * @param model
      * @return
      */
-    @DeleteMapping("/restaurant/restaurantDelete")
+    @DeleteMapping("/restaurantDelete")
     public String restaurantDelete(Restaurant restaurant, Model model){
         restaurantService.restaurantDelete(restaurant);
         return messageService.redirectMessage(model, "삭제를 완료했습니다.", "/restaurant/restaurantListForm");

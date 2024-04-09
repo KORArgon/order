@@ -13,14 +13,15 @@ import lombok.Setter;
 @Table(name="NT_RESTAURANT")
 public class Restaurant {
 
-    @Id
-    @Column(name = "MEMBER_ID", nullable = false)
+
+    @Column(name = "MEMBER_ID", columnDefinition = "VARCHAR(20)", nullable = false)
     private String memberId;
 
-    @Column(name = "RESTAURANT_ID", columnDefinition = "VARCHAR(100)")
+    @Id
+    @Column(name = "RESTAURANT_ID", columnDefinition = "VARCHAR(100)", nullable = false)
     private String restaurantId;
 
-    @Column(name = "RESTAURANT_NM", columnDefinition = "VARCHAR(200)")
+    @Column(name = "RESTAURANT_NM", columnDefinition = "VARCHAR(200)", nullable = false)
     private String restaurantNm;
 
     @Column(name = "REGIST_DATE", columnDefinition = "CHAR(14)", nullable = false)
