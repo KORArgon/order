@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지</title>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+<th:block th:include="/.include/menu.html"></th:block>
+<div class="container">
+    <h2>회원 상세</h2>
+    <div class="details">
+        <p><strong>아이디:</strong>[[${member.memberId}]]</p>
+        <p><strong>이름:</strong>[[${member.name}]]</p>
+        <p><strong>등급:</strong>[[${member.grade}]]</p>
+    </div>
+    <div class="buttons">
+        <button class="button-normal" th:onclick="|location.href='@{/memberUpdateForm(memberId=${member.memberId})}'|">수정</button>
+    </div>
+</div>
+</body>
+</html>

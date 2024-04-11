@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지</title>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+<th:block th:include="/.include/menu.html"></th:block>
+<div class="container">
+    <h2>회원 수정</h2>
+    <form id="memberUpdateForm" name="memberUpdateForm" th:action="@{./memberUpdate}" th:method="put">
+        <input type="hidden" name="grade" id="grade" th:value="${member.grade}" required>
+        <div class="form-group">
+            <label for="memberId">아이디:</label>
+            <input type="text" name="memberId" id="memberId" th:value="${member.memberId}" th:readonly="true">
+        </div>
+        <div class="form-group">
+            <label for="password">비밀번호:</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <div class="form-group">
+            <label for="name">이름:</label>
+            <input type="text" name="name" id="name" th:value="${member.name}" required>
+        </div>
+        <!--<div class="form-group">
+            <label for="name">등급:</label>
+            <input type="text" name="grade" id="grade" th:value="${member.grade}" required>
+        </div>-->
+        <button class="button-normal" type="submit">수정</button>
+    </form>
+</div>
+</body>
+</html>

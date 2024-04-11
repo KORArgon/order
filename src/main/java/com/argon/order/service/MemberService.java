@@ -3,6 +3,7 @@ package com.argon.order.service;
 import com.argon.order.util.DateUtil;
 import com.argon.order.domain.Member;
 import com.argon.order.repository.MemberRepository;
+import com.argon.order.util.LoginUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -54,8 +55,8 @@ public class MemberService implements UserDetailsService {
      * @param id
      * @return
      */
-    public Member findById(Long id){
-        return memberRepository.findById(id).orElseThrow();
+    public Member findById(String id){
+        return memberRepository.findByMemberId(id);
     }
 
     /**
@@ -63,23 +64,34 @@ public class MemberService implements UserDetailsService {
      * @param member
      */
     @Transactional
-    public boolean save(Member member, Principal principal) {
+    public boolean save(Member member, Principal principal, String insertAndUpdateAt) {
         Member checkUser = new Member();
-        checkUser.setMemberId(member.getMemberId());
+        if(insertAndUpdateAt.equals("insert")){
+            checkUser.setMemberId(member.getMemberId());
 
-        if (memberRepository.findByMemberId(member.getMemberId()) != null){
-            return false;
+            if (memberRepository.findByMemberId(member.getMemberId()) != null){
+                return false;
+            }
+            Member insertMember = new Member();
+            insertMember.setMemberId(member.getMemberId());
+            insertMember.setPassword(passwordEncoder.encode(member.getPassword()));
+            insertMember.setName(member.getName());
+            insertMember.setGrade(member.getGrade());
+            insertMember.setRegistDate(DateUtil.getTodateTime());
+            if(principal.getName() == null) insertMember.setRegistId(member.getMemberId());
+            else insertMember.setRegistId(principal.getName());
+            memberRepository.save(insertMember);
         }
-        Member insertMember = new Member();
-        insertMember.setMemberId(member.getMemberId());
-        insertMember.setPassword(passwordEncoder.encode(member.getPassword()));
-        insertMember.setName(member.getName());
-        insertMember.setGrade(member.getGrade());
-        insertMember.setRegistDate(DateUtil.getTodateTime());
-        if(principal.getName() == null) insertMember.setRegistId(member.getMemberId());
-        else insertMember.setRegistId(principal.getName());
+        if(insertAndUpdateAt.equals("update")){
+            checkUser = memberRepository.findByMemberId(member.getMemberId());
+            if(member.getPassword().isEmpty()) member.setPassword(checkUser.getPassword());
+            else member.setPassword(passwordEncoder.encode(member.getPassword()));
+            member.setUpdateDate(DateUtil.getTodateTime());
+            member.setUpdateId(LoginUtil.getLoingId());
+            memberRepository.save(member);
+        }
 
-        memberRepository.save(insertMember);
+
         return true;
     }
 

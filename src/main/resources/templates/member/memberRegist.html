@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Page</title>
+    <title>관리자 페이지</title>
     <link rel="stylesheet" href="/css/common.css">
 </head>
 <body>
 <th:block th:include="/.include/menu.html"></th:block>
 <div class="container">
-    <h2>회원등록</h2>
+    <h2>회원 등록</h2>
     <form id="memberRegistForm" name="memberRegistForm" action="./memberRegist" method="post">
         <input type="hidden" name="grade" id="grade" value="STAFF"/>
         <div class="form-group">
@@ -24,7 +24,7 @@
             <label for="name">이름:</label>
             <input type="text" id="name" name="name" required>
         </div>
-        <button type="submit">등록</button>
+        <button class="button-normal" type="submit">등록</button>
     </form>
 </div>
 </body>
