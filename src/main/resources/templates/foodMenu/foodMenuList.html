@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List Page</title>
+    <title>관리자 페이지</title>
     <link rel="stylesheet" href="/css/common.css">
 </head>
 <body>
@@ -24,27 +24,46 @@
             <th>번호</th>
             <th>메뉴명</th>
             <th>가격</th>
-            <th colspan="3">관리</th>
+            <th colspan="2">관리</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="foodMenu : ${foodMenuList}">
-            <td th:text="${foodMenu.foodMenuNo}"></td>
+        <tr th:each="foodMenu, status : ${foodMenuList}">
+            <td th:text="${totCnt-status.index-10*(nowPage-1)}"></td>
             <td th:text="${foodMenu.foodMenuNm}"></td>
             <td th:text="${foodMenu.foodMenuPrice}"></td>
-            <td><a class="btn_s" th:href="@{/weather/weatherViewForm(foodMenu=${foodMenu.foodMenuNo})}">보기</a></td>
-            <td><a class="btn_s" th:href="@{/weather/weatherUpdateForm(foodMenu=${foodMenu.foodMenuNo})}">수정</a></td>
+            <td><a class="btn_s" th:href="@{/foodMenuViewForm(foodMenuNo=${foodMenu.foodMenuNo})}">보기</a></td>
+            <td><a class="btn_s" th:href="@{/foodMenuUpdateForm(foodMenuNo=${foodMenu.foodMenuNo})}">수정</a></td>
             <td>
-                <form id="delete_form" th:action="@{/weather/weatherDelete(foodMenu=${foodMenu.foodMenuNo})}" method="post">
+                <form id="delete_form" th:action="@{foodMenuDelete(foodMenuNo=${foodMenu.foodMenuNo})}" method="post">
                     <input type="hidden" name="_method" value="delete"/>
-                    <input type="submit" class="btn_s" value="삭제">
+                    <input type="submit" class="button-small" value="삭제">
                 </form>
             </td>
         </tr>
+        <th:block th:if="${totCnt eq 0}">
+            <tr>
+                <td colspan="5">결과가 없습니다.</td>
+            </tr>
+        </th:block>
         </tbody>
     </table>
     <div class="buttons">
-        <button onclick="location.href='./foodMenuRegistForm'">등록</button>
+        <button class="button-normal" onclick="location.href='./foodMenuRegistForm'">등록</button>
+    </div>
+    <div class="pagination">
+        <a th:href="@{/foodMenuListForm(page=0)}">최초페이지</a>
+        <th:block th:if="${nowPage != 1}"><a th:href="@{/foodMenuListForm(page=${nowPage-2})}">이전페이지</a></th:block>
+        <th:block th:if="${nowPage == 1}"><a th:href="@{/foodMenuListForm(page=0)}">이전페이지</a></th:block>
+        <th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
+            <th:block th:if="${endPage >= nowPage }">
+                <a th:if="${page != nowPage}" th:href="@{/foodMenuListForm(page=${page-1})}" th:text ="${page}"></a>
+                <strong th:if="${page==nowPage}" th:text ="${page}"></strong>
+            </th:block>
+        </th:block>
+        <th:block th:if="${nowPage != totalPages}"><a th:href="@{/foodMenuListForm(page=${nowPage})}">다음페이지</a></th:block>
+        <th:block th:if="${nowPage == totalPages}"><a th:href="@{/foodMenuListForm(page=${totalPages-1})}">다음페이지</a></th:block>
+        <a th:href="@{/foodMenuListForm(page=${totalPages-1})}">마지막페이지</a>
     </div>
 </div>
 </body>
