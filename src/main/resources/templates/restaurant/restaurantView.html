@@ -14,7 +14,7 @@
         <p><strong>식당명:</strong>[[${restaurant.restaurantNm}]]</p>
     </div>
     <div class="buttons">
-        <button class="button-normal" th:onclick="|location.href='@{/restaurantUpdateForm(restaurant=${restaurant.restaurantId})}'|">수정</button>
+        <button class="button-normal" th:onclick="|location.href='@{/restaurantUpdateForm(restaurantId=${restaurant.restaurantId})}'|">수정</button>
     </div>
 </div>
 </body>
