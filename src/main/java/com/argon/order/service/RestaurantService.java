@@ -26,7 +26,7 @@ public class RestaurantService {
      * @param pageable
      * @return
      */
-    public Page<Restaurant> findAll(Pageable pageable) {
+    public Page<Restaurant> findByMemberId(Pageable pageable) {
         return restaurantRepository.findByMemberId(pageable, LoginUtil.getLoingId());
     }
 

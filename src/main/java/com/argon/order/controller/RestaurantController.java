@@ -33,7 +33,7 @@ public class RestaurantController {
      */
     @GetMapping("/restaurantListForm")
     public String restaurantListForm(Model model, @PageableDefault(page=0, size=10, sort="registDate", direction = Sort.Direction.DESC) Pageable pageable){
-        Page<Restaurant> restaurantList = restaurantService.findAll(pageable);
+        Page<Restaurant> restaurantList = restaurantService.findByMemberId(pageable);
         model.addAttribute("totCnt",restaurantList.getTotalElements());
         model.addAttribute("restaurantList", restaurantList);
         PagingUtil.getPaginationInfo(model, restaurantList);
