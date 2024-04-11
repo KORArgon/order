@@ -48,7 +48,7 @@ public class RestaurantController {
      */
     @GetMapping("/restaurantViewForm")
     public String restaurantViewForm(Restaurant restaurant, Model model){
-        Restaurant result = restaurantService.findById(restaurant.getRestaurantId());
+        Restaurant result = restaurantService.findByRestaurantId(restaurant.getRestaurantId());
         model.addAttribute("restaurant", result);
         return "/restaurant/restaurantView";
     }
@@ -82,7 +82,7 @@ public class RestaurantController {
      */
     @GetMapping("/restaurantUpdateForm")
     public String restaurantUpdateForm(Restaurant restaurant, Model model){
-        Restaurant result = restaurantService.findById(restaurant.getRestaurantId());
+        Restaurant result = restaurantService.findByRestaurantId(restaurant.getRestaurantId());
         model.addAttribute("restaurant", result);
         return "/restaurant/restaurantUpdate";
     }

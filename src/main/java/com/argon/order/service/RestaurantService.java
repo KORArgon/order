@@ -35,7 +35,7 @@ public class RestaurantService {
      * @param id
      * @return
      */
-    public Restaurant findById(String id){
+    public Restaurant findByRestaurantId(String id){
         return restaurantRepository.findByRestaurantId(id);
     }
 
