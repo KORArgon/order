@@ -1,43 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <title>날씨</title>
     <meta charset="UTF-8">
-    <link href="/css/weather.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지</title>
+    <link rel="stylesheet" href="/css/common.css">
 </head>
 <body>
-<table class="sub_table">
-    <thead>
-    <tr>
-        <th>날씨ID</th>
-        <th>측정일시분초</th>
-        <th>측정일시분초</th>
-        <th>강수형태</th>
-        <th>습도</th>
-        <th>1시간 강수량</th>
-        <th>기온</th>
-        <th>동서바람성분</th>
-        <th>풍향</th>
-        <th>남북바람성분</th>
-        <th>풍속</th>
-    </tr>
-    </thead>
-    <tbody>
-    <td th:text="${weather.weatherId}"></td>
-    <td th:text="${weather.baseDate}"></td>
-    <td th:text="${weather.baseTime}"></td>
-    <td th:text="${weather.pty}"></td>
-    <td th:text="${weather.reh}"></td>
-    <td th:text="${weather.rn1}"></td>
-    <td th:text="${weather.t1h}"></td>
-    <td th:text="${weather.uuu}"></td>
-    <td th:text="${weather.vec}"></td>
-    <td th:text="${weather.vvv}"></td>
-    <td th:text="${weather.wsd}"></td>
-    </tbody>
-</table>
-<div class="main_div">
-    <a href="/weather/weatherListForm" class="main_big_btn">날씨목록</a>
+<th:block th:include="/.include/menu.html"></th:block>
+<div class="container">
+    <h2>식당 상세</h2>
+    <div class="details">
+        <p><strong>식당명:</strong>[[${restaurant.restaurantNm}]]</p>
+    </div>
+    <div class="buttons">
+        <button class="button-normal" th:onclick="|location.href='@{/restaurantUpdateForm(restaurant=${restaurant.restaurantId})}'|">수정</button>
+    </div>
 </div>
 </body>
 </html>

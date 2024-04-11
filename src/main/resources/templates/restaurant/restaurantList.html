@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List Page</title>
+    <title>관리자 페이지</title>
     <link rel="stylesheet" href="/css/common.css">
 </head>
 <body>
@@ -27,10 +27,11 @@
         <tbody>
         <tr th:each="restaurant, status : ${restaurantList}">
             <td th:text="${totCnt-status.index-10*(nowPage-1)}"></td>
-            <td th:href="@{/restaurantViewForm(restaurant=${restaurant.restaurantId})}" th:text="${restaurant.restaurantNm}"></td>
-            <td><button class="button-small" th:onclick="|location.href='@{/restaurantUpdateForm(restaurant=${restaurant.restaurantId})}'|">수정</button></td>
+            <td><a th:href="@{/restaurantViewForm(restaurantId=${restaurant.restaurantId})}" th:text="${restaurant.restaurantNm}"></a></td>
+            <td><button class="button-small" th:onclick="|location.href='@{/restaurantUpdateForm(restaurantId=${restaurant.restaurantId})}'|">수정</button></td>
             <td>
-                <form id="delete_form" th:action="@{/restaurantDelete(restaurant=${restaurant.restaurantId})}">
+                <form id="delete_form" th:action="@{/restaurantDelete}" th:method="delete">
+                    <input type="hidden" name="restaurantId" id="restaurantId" th:value="${restaurant.restaurantId}">
                     <button type="submit" class="button-small">삭제</button>
                 </form>
             </td>

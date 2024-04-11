@@ -4,7 +4,6 @@ import com.argon.order.domain.Restaurant;
 import com.argon.order.repository.RestaurantRepository;
 import com.argon.order.util.DateUtil;
 import com.argon.order.util.LoginUtil;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,7 +29,7 @@ public class RestaurantService {
      * @return
      */
     public Page<Restaurant> findAll(Pageable pageable) {
-        return restaurantRepository.findAll(pageable);
+        return restaurantRepository.findByMemberId(pageable, LoginUtil.getLoingId());
     }
 
     /**
@@ -39,7 +38,7 @@ public class RestaurantService {
      * @return
      */
     public Restaurant findById(String id){
-        return (Restaurant) restaurantRepository.findByRestaurantId(id);
+        return restaurantRepository.findByRestaurantId(id);
     }
 
     /**
@@ -48,7 +47,7 @@ public class RestaurantService {
      */
     public void save(Restaurant restaurant) {
         restaurant.setMemberId(LoginUtil.getLoingId());
-        if(restaurantRepository.findByRestaurantId(restaurant.getRestaurantId()).size() == 0){
+        if(restaurantRepository.findByRestaurantId(restaurant.getRestaurantId()) == null){
             String restaurantId = DateUtil.getTodateTime();
             restaurant.setRestaurantId(restaurantId);
             restaurant.setRegistDate(DateUtil.getTodateTime());
@@ -70,8 +69,4 @@ public class RestaurantService {
         restaurantRepository.delete(restaurant);
     }
 
-    public List<Restaurant> findByRestaurantId(String restaurantId) {
-        return restaurantRepository.findByRestaurantId(restaurantId);
-    }
-    
 }

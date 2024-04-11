@@ -24,16 +24,16 @@ public class Restaurant {
     @Column(name = "RESTAURANT_NM", columnDefinition = "VARCHAR(200)", nullable = false)
     private String restaurantNm;
 
-    @Column(name = "REGIST_DATE", columnDefinition = "CHAR(14)", nullable = false)
+    @Column(name = "REGIST_DATE", columnDefinition = "CHAR(14)", nullable = false, updatable=false)
     private String registDate;
 
-    @Column(name = "REGIST_ID", columnDefinition = "VARCHAR(20)", nullable = false)
+    @Column(name = "REGIST_ID", columnDefinition = "VARCHAR(20)", nullable = false, updatable=false)
     private String registId;
 
-    @Column(name = "UPDATE_DATE", columnDefinition = "CHAR(14)")
+    @Column(name = "UPDATE_DATE", columnDefinition = "CHAR(14)", insertable=false)
     private String updateDate;
 
-    @Column(name = "UPDATE_ID", columnDefinition = "VARCHAR(20)")
+    @Column(name = "UPDATE_ID", columnDefinition = "VARCHAR(20)", insertable=false)
     private String updateId;
 
 }

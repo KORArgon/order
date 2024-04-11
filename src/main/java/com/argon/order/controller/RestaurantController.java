@@ -34,7 +34,7 @@ public class RestaurantController {
      * @return
      */
     @GetMapping("/restaurantListForm")
-    public String restaurantListForm(Model model, @PageableDefault(page=0, size=10, sort="restaurantId", direction = Sort.Direction.DESC) Pageable pageable){
+    public String restaurantListForm(Model model, @PageableDefault(page=0, size=10, sort="registDate", direction = Sort.Direction.DESC) Pageable pageable){
         Page<Restaurant> restaurantList = restaurantService.findAll(pageable);
         model.addAttribute("totCnt",restaurantList.getTotalElements());
         model.addAttribute("restaurantList", restaurantList);
@@ -110,7 +110,7 @@ public class RestaurantController {
     @DeleteMapping("/restaurantDelete")
     public String restaurantDelete(Restaurant restaurant, Model model){
         restaurantService.restaurantDelete(restaurant);
-        return messageService.redirectMessage(model, "삭제를 완료했습니다.", "/restaurant/restaurantListForm");
+        return messageService.redirectMessage(model, "삭제를 완료했습니다.", "/restaurantListForm");
     }
 
 }
