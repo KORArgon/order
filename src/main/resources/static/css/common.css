@@ -61,7 +61,19 @@ input[type="password"] {
     border-radius: 5px;
 }
 
-button {
+.button-small {
+    display: inline-block;
+    width: 50px;
+    padding: 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+.button-normal {
     width: 180px;
     padding: 10px;
     background-color: #007bff;
@@ -70,11 +82,9 @@ button {
     border-radius: 5px;
     cursor: pointer;
 }
-
 button:hover {
     background-color: #0056b3;
 }
-
 /* List styles */
 .item-table {
     width: 100%;
@@ -95,7 +105,7 @@ button:hover {
 }
 
 /* Button styles */
-.buttons {
+/*.buttons {
     margin-bottom: 20px;
 }
 
@@ -111,7 +121,7 @@ button:hover {
 
 .buttons button:hover {
     background-color: #0056b3;
-}
+}*/
 .file-input {
     display: none;
 }
@@ -123,4 +133,46 @@ button:hover {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+/* Styling for pagination container */
+/* Styling for pagination links */
+.pagination {
+    text-align: center; /* 가운데 정렬 추가 */
+}
+
+.pagination a {
+    padding: 8px 12px;
+    margin: 10px 5px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.pagination a:hover {
+    background-color: #f2f2f2;
+}
+
+/* Styling for the current page */
+.pagination strong {
+    padding: 8px 12px;
+    margin: 0 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+}
+
+/* Styling for the previous and next links */
+.pagination a.th-disabled {
+    color: #aaa;
+    pointer-events: none;
+}
+
+/* Optional: Styling for the '마지막페이지' link */
+.pagination a:last-child {
+    margin-left: 10px;
 }

@@ -12,44 +12,52 @@
     <h2>식당 목록</h2>
     <table class="item-table">
         <colgroup>
-            <col width="5">
+            <col width="10%">
             <col width="70%"/>
             <col width="10%"/>
-            <col width="5%"/>
-            <col width="5%"/>
+            <col width="10%"/>
         </colgroup>
         <thead>
         <tr>
+            <th>번호</th>
             <th>식당명</th>
-            <th>가격</th>
             <th colspan="2">관리</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="restaurant : ${restaurantList}">
-            <td th:text="${restaurant.restaurantNm}"></td>
-            <td><a class="btn_s" th:href="@{/restaurantViewForm(restaurant=${restaurant.restaurantId})}">보기</a></td>
-            <td><a class="btn_s" th:href="@{/restaurantUpdateForm(restaurant=${restaurant.restaurantId})}">수정</a></td>
+        <tr th:each="restaurant, status : ${restaurantList}">
+            <td th:text="${totCnt-status.index-10*(nowPage-1)}"></td>
+            <td th:href="@{/restaurantViewForm(restaurant=${restaurant.restaurantId})}" th:text="${restaurant.restaurantNm}"></td>
+            <td><button class="button-small" th:onclick="|location.href='@{/restaurantUpdateForm(restaurant=${restaurant.restaurantId})}'|">수정</button></td>
             <td>
                 <form id="delete_form" th:action="@{/restaurantDelete(restaurant=${restaurant.restaurantId})}">
-                    <input type="submit" class="btn_s" value="삭제">
+                    <button type="submit" class="button-small">삭제</button>
                 </form>
             </td>
         </tr>
-        <th:block th:if="${#lists.size(restaurantList) == 0}">
+        <th:block th:if="${totCnt eq 0}">
             <tr>
-                <td colspan="5">결과가 없습니다.0</td>
-            </tr>
-        </th:block>
-        <th:block th:if="${#lists.size(restaurantList) == 1}">
-            <tr>
-                <td colspan="5">결과가 없습니다1.</td>
+                <td colspan="4">결과가 없습니다.</td>
             </tr>
         </th:block>
         </tbody>
     </table>
-    <div class="buttons">
-        <button onclick="location.href='./restaurantRegistForm'">등록</button>
+    <div>
+        <button class="button-normal" onclick="location.href='./restaurantRegistForm'">등록</button>
+    </div>
+    <div class="pagination">
+        <a th:href="@{/restaurantListForm(page=0)}">최초페이지</a>
+        <th:block th:if="${nowPage != 1}"><a th:href="@{/restaurantListForm(page=${nowPage-2})}">이전페이지</a></th:block>
+        <th:block th:if="${nowPage == 1}"><a th:href="@{/restaurantListForm(page=0)}">이전페이지</a></th:block>
+        <th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
+            <th:block th:if="${endPage >= nowPage }">
+                <a th:if="${page != nowPage}" th:href="@{/restaurantListForm(page=${page-1})}" th:text ="${page}"></a>
+                <strong th:if="${page==nowPage}" th:text ="${page}"></strong>
+            </th:block>
+        </th:block>
+        <th:block th:if="${nowPage != totalPages}"><a th:href="@{/restaurantListForm(page=${nowPage})}">다음페이지</a></th:block>
+        <th:block th:if="${nowPage == totalPages}"><a th:href="@{/restaurantListForm(page=${totalPages-1})}">다음페이지</a></th:block>
+        <a th:href="@{/restaurantListForm(page=${totalPages-1})}">마지막페이지</a>
     </div>
 </div>
 </body>
