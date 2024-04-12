@@ -12,10 +12,9 @@
     <h2>메뉴 목록</h2>
     <table class="item-table">
         <colgroup>
-            <col width="5">
+            <col width="10%">
             <col width="70%"/>
             <col width="10%"/>
-            <col width="5%"/>
             <col width="5%"/>
             <col width="5%"/>
         </colgroup>
@@ -30,13 +29,12 @@
         <tbody>
         <tr th:each="foodMenu, status : ${foodMenuList}">
             <td th:text="${totCnt-status.index-10*(nowPage-1)}"></td>
-            <td th:text="${foodMenu.foodMenuNm}"></td>
+            <td><a th:href="@{/foodMenuViewForm(foodMenuNo=${foodMenu.foodMenuNo})}" th:text="${foodMenu.foodMenuNm}"></a></td>
             <td th:text="${foodMenu.foodMenuPrice}"></td>
-            <td><a class="btn_s" th:href="@{/foodMenuViewForm(foodMenuNo=${foodMenu.foodMenuNo})}">보기</a></td>
-            <td><a class="btn_s" th:href="@{/foodMenuUpdateForm(foodMenuNo=${foodMenu.foodMenuNo})}">수정</a></td>
+            <td><a class="button-small" th:href="@{/foodMenuUpdateForm(foodMenuNo=${foodMenu.foodMenuNo})}">수정</a></td>
             <td>
-                <form id="delete_form" th:action="@{foodMenuDelete(foodMenuNo=${foodMenu.foodMenuNo})}" method="post">
-                    <input type="hidden" name="_method" value="delete"/>
+                <form id="delete_form" th:action="@{/foodMenuDelete}" th:method="delete">
+                    <input type="hidden" name="foodMenuNo" th:value="${foodMenu.foodMenuNo}"/>
                     <input type="submit" class="button-small" value="삭제">
                 </form>
             </td>

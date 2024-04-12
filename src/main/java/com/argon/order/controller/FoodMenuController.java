@@ -1,5 +1,6 @@
 package com.argon.order.controller;
 
+import com.argon.order.util.LoginUtil;
 import com.argon.order.util.PagingUtil;
 import com.argon.order.domain.FoodMenu;
 import com.argon.order.service.FoodMenuService;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.io.IOException;
+
 @Controller
 @RequiredArgsConstructor
 public class FoodMenuController {
@@ -35,9 +38,10 @@ public class FoodMenuController {
      * @return
      */
     @GetMapping("/foodMenuListForm")
-    public String foodMenuListForm(Model model, @PageableDefault(page=0, size=10, sort="foodMenuNo", direction = Sort.Direction.DESC) Pageable pageable){
-        Page<FoodMenu> foodMenuList = foodMenuService.findAll(pageable);
-//        Page<FoodMenu> foodMenuList = foodMenuService.findByRestaurantId(pageable);
+    public String foodMenuListForm(Model model, HttpServletRequest request,
+                                   @PageableDefault(page=0, size=10, sort="foodMenuNo", direction = Sort.Direction.DESC) Pageable pageable){
+//        Page<FoodMenu> foodMenuList = foodMenuService.findAll(pageable);
+        Page<FoodMenu> foodMenuList = foodMenuService.findByRestaurantId(pageable, LoginUtil.getRestaurantId(request));
         model.addAttribute("totCnt",foodMenuList.getTotalElements());
         model.addAttribute("foodMenuList", foodMenuList);
         PagingUtil.getPaginationInfo(model, foodMenuList);
@@ -74,9 +78,13 @@ public class FoodMenuController {
      * @return
      */
     @PostMapping("/foodMenuRegist")
-    public String foodMenuRegist(FoodMenu foodMenu, Model model, HttpServletRequest request, MultipartFile file){
-        foodMenuService.save(foodMenu, request);
-        return messageService.redirectMessage(model, "등록을 완료했습니다.", "/foodMenu/foodMenuListForm");
+    public String foodMenuRegist(FoodMenu foodMenu, Model model, MultipartHttpServletRequest request){
+        try {
+            foodMenuService.save(foodMenu, request);
+        } catch (IOException e) {
+            messageService.backMessage(model, "등록에 실패했습니다.");
+        }
+        return messageService.redirectMessage(model, "등록을 완료했습니다.", "/foodMenuListForm");
     }
 
     /**
@@ -98,10 +106,14 @@ public class FoodMenuController {
      * @param model
      * @return
      */
-    @PutMapping("/foodMenu/foodMenuUpdate")
-    public String foodMenuUpdate(FoodMenu foodMenu, Model model, HttpServletRequest request, MultipartFile file){
-        foodMenuService.save(foodMenu, request);
-        return messageService.redirectMessage(model, "수정을 완료했습니다.", "/foodMenu/foodMenuListForm");
+    @PutMapping("/foodMenuUpdate")
+    public String foodMenuUpdate(FoodMenu foodMenu, Model model, MultipartHttpServletRequest request){
+        try {
+            foodMenuService.save(foodMenu, request);
+        } catch (IOException e) {
+            messageService.backMessage(model, "수정에 실패했습니다.");
+        }
+        return messageService.redirectMessage(model, "수정을 완료했습니다.", "/foodMenuListForm");
     }
 
     /**
@@ -110,10 +122,10 @@ public class FoodMenuController {
      * @param model
      * @return
      */
-    @DeleteMapping("/foodMenu/foodMenuDelete")
+    @DeleteMapping("/foodMenuDelete")
     public String foodMenuDelete(FoodMenu foodMenu, Model model){
         foodMenuService.foodMenuDelete(foodMenu);
-        return messageService.redirectMessage(model, "삭제를 완료했습니다.", "/foodMenu/foodMenuListForm");
+        return messageService.redirectMessage(model, "삭제를 완료했습니다.", "/foodMenuListForm");
     }
 
 }

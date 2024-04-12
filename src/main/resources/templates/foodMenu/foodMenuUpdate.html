@@ -1,64 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>날씨 수정</title>
     <meta charset="UTF-8">
-    <link href="/css/weather.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지</title>
+    <link rel="stylesheet" href="/css/common.css">
 </head>
 <body>
+<th:block th:include="/.include/menu.html"></th:block>
 <div class="container">
-    <div class="main_div">
-        <form th:action="@{/weather/weatherUpdate}" th:object="${weather}" method="post">
-            <input type="hidden" id="weatherId" name="weatherId" th:value="*{weatherId}" />
-            <input type="hidden" name="_method" value="put"/>
-            <table class="sub_table">
-                <tbody>
-                <tr>
-                    <th><label for="baseDate">측정일</label></th>
-                    <td><input type="text" id="baseDate" name="baseDate" placeholder="측정일을 입력하세요" th:field="*{baseDate}" th:value="*{baseDate}"></td>
-                </tr>
-                <tr>
-                    <th><label for="baseTime">측정시분초</label></th>
-                    <td><input type="text" id="baseTime" name="baseTime" placeholder="측정시분초를 입력하세요" th:value="*{baseTime}"></td>
-                </tr>
-                <tr>
-                    <th><label for="pty">강수형태</label></th>
-                    <td><input type="text" id="pty" name="pty" placeholder="강수형태를 입력하세요" th:value="*{pty}"></td>
-                </tr>
-                <tr>
-                    <th><label for="reh">습도</label></th>
-                    <td><input type="text" id="reh" name="reh" placeholder="습도를 입력하세요" th:value="*{reh}"></td>
-                </tr>
-                <tr>
-                    <th><label for="rn1">1시간 강수량</label></th>
-                    <td><input type="text" id="rn1" name="rn1" placeholder="1시간 강수량을 입력하세요" th:value="*{rn1}"></td>
-                </tr>
-                <tr>
-                    <th><label for="t1h">기온</label></th>
-                    <td><input type="text" id="t1h" name="t1h" placeholder="기온을 입력하세요" th:value="*{t1h}"></td>
-                </tr>
-                <tr>
-                    <th><label for="uuu">동서바람성분</label></th>
-                    <td><input type="text" id="uuu" name="uuu" placeholder="동서바람성분을 입력하세요" th:value="*{uuu}"></td>
-                </tr>
-                <tr>
-                    <th><label for="vec">풍향</label></th>
-                    <td><input type="text" id="vec" name="vec" placeholder="풍향을 입력하세요" th:value="*{vec}"></td>
-                </tr>
-                <tr>
-                    <th><label for="vvv">남북바람성분</label></th>
-                    <td><input type="text" id="vvv" name="vvv" placeholder="남북바람성분을 입력하세요" th:value="*{vvv}"></td>
-                </tr>
-                <tr>
-                    <th><label for="wsd">풍속</label></th>
-                    <td><input type="text" id="wsd" name="wsd" placeholder="풍속을 입력하세요" th:value="*{wsd}"></td>
-                </tr>
-                </tbody>
-            </table>
-            <button type="submit" class="btn_m">수정</button>
-            <a href="/weather/weatherListForm" class="sub_btn">목록</a>
-        </form>
-    </div>
+    <h2>메뉴 등록</h2>
+    <form id="foodMenuRegistForm" name="foodMenuRegistForm" action="./foodMenuRegist" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="foodMenuNm">메뉴명:</label>
+            <input type="text" id="foodMenuNm" name="foodMenuNm" required>
+        </div>
+        <div class="form-group">
+            <label for="foodMenuPrice">메뉴가격:</label>
+            <input type="text" id="foodMenuPrice" name="foodMenuPrice" required>
+        </div>
+        <div class="form-group">
+            <label for="menuCategory">메뉴카테고리:</label>
+            <input type="text" id="menuCategory" name="menuCategory" required>
+        </div>
+        <div class="form-group">
+            <label for="popularAt">인기메뉴 여부:</label>
+            <input type="text" id="popularAt" name="popularAt" required>
+        </div>
+        <div class="form-group">
+            <label for="foodMenuTitle">타이틀:</label>
+            <input type="text" id="foodMenuTitle" name="foodMenuTitle" required>
+        </div>
+        <div class="form-group">
+            <label>메뉴 이미지:</label>
+            <label for="fileUpload" class="file-label">파일 업로드</label>
+            <input type="file" id="fileUpload" name="fileUpload" class="file-input" onchange="displayFileName()">
+            <span id="fileName">선택된 파일 없음</span>
+        </div>
+        <button class="button-normal" type="submit">등록</button>
+    </form>
 </div>
+<script>
+    function displayFileName() {
+        const fileInput = document.getElementById('fileUpload');
+        const fileNameDisplay = document.getElementById('fileName');
+        const fileName = fileInput.files[0].name;
+        fileNameDisplay.textContent = fileName;
+    }
+</script>
 </body>
 </html>
