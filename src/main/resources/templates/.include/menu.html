@@ -1,7 +1,7 @@
 <div class="header">
     <div class="menu">
         <a href="/">Home</a>
-        <th:block th:if="${loginMap.loginGrade == 'ADMIN'}">
+        <th:block th:if="${commonMap.loginGrade == 'ADMIN'}">
             <a href="./memberListForm">사용자 관리</a>
         </th:block>
         <a href="./restaurantListForm">식당 관리</a>
@@ -9,7 +9,35 @@
         <a href="./orderHistoryListForm">주문내역 관리</a>
     </div>
     <div class="logout">
-        <span th:text="${loginMap.loginName}">님</span>
+        <div class="form-group select-box-menu">
+            <select id="category"
+                    th:onchange="restaurantIdLogin(this.value)"
+            >
+                <option>식당 선택</option>
+                <th:block th:each="item : ${commonMap.restaurantList}">
+                    <option th:value="${item.restaurantId}"
+                            th:text="${item.restaurantNm}"
+                            th:selected="${item.restaurantId} == ${commonMap.restaurantId}"
+                    >
+                </th:block>
+                </option>
+            </select>
+        </div>
+        <span th:text="${commonMap.loginName}">님</span>
         <a href="/logout">Logout</a>
     </div>
 </div>
+<script src="/js/jquery-3.5.1.js"></script>
+<script th:inline="javascript">
+    function restaurantIdLogin(restaurantId){
+        $.ajax({
+            type: "POST",
+            url: "/loginRestaurant",
+            data:{
+                "restaurantId" : restaurantId
+            },
+        }).always(function() {
+            location.reload()
+        })
+    }
+</script>

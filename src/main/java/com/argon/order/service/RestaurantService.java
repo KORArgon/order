@@ -46,8 +46,12 @@ public class RestaurantService {
     public void save(Restaurant restaurant) {
         restaurant.setMemberId(LoginUtil.getLoingId());
         if(restaurantRepository.findByRestaurantId(restaurant.getRestaurantId()) == null){
-            String restaurantId = DateUtil.getTodateTime();
-            restaurant.setRestaurantId(restaurantId);
+            StringBuffer sb = new StringBuffer();
+            if(LoginUtil.getLoginIsAdmin()) sb.append("A");
+            if(!LoginUtil.getLoginIsAdmin()) sb.append("B");
+            sb.append(DateUtil.getTodateTime());
+            sb.append(String.format("%04d",restaurantRepository.selectRestaurantNo()));
+            restaurant.setRestaurantId(sb.toString());
             restaurant.setRegistDate(DateUtil.getTodateTime());
             restaurant.setRegistId(LoginUtil.getLoingId());
         }   else {

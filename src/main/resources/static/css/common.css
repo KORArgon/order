@@ -60,6 +60,29 @@ input[type="password"] {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+/* Custom select box styles */
+.select-box-menu {
+    display: inline;
+    width: 100%;
+}
+
+.select-box-menu select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.select-box-menu::after {
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
 
 .button-small {
     display: inline-block;

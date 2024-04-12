@@ -11,7 +11,7 @@
 <div class="container">
     <h2>식당 수정</h2>
     <form id="restaurantUpdateForm" name="restaurantUpdateForm" th:action="@{./restaurantUpdate}" th:method="put">
-        <input type="hidden" name="restaurantId" id="restaurantId" th:value="${restaurant.restaurantId}">
+        <input type="hidden" name="restaurantNo" id="restaurantNo" th:value="${restaurant.restaurantNo}">
         <div class="form-group">
             <label for="restaurantNm">식당명:</label>
             <input type="text" name="restaurantNm" id="restaurantNm" th:value="${restaurant.restaurantNm}" required>

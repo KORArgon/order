@@ -31,7 +31,7 @@
             <td><button class="button-small" th:onclick="|location.href='@{/restaurantUpdateForm(restaurantId=${restaurant.restaurantId})}'|">수정</button></td>
             <td>
                 <form id="delete_form" th:action="@{/restaurantDelete}" th:method="delete">
-                    <input type="hidden" name="restaurantId" id="restaurantId" th:value="${restaurant.restaurantId}">
+                    <input type="hidden" name="restaurantNo" id="restaurantNo" th:value="${restaurant.restaurantNo}">
                     <button type="submit" class="button-small">삭제</button>
                 </form>
             </td>

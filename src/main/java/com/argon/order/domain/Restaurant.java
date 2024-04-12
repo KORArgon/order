@@ -1,9 +1,6 @@
 package com.argon.order.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,11 +10,14 @@ import lombok.Setter;
 @Table(name="NT_RESTAURANT")
 public class Restaurant {
 
+    @Id
+    @Column(name = "RESTAURANT_NO", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long restaurantNo;
 
     @Column(name = "MEMBER_ID", columnDefinition = "VARCHAR(20)", nullable = false)
     private String memberId;
 
-    @Id
     @Column(name = "RESTAURANT_ID", columnDefinition = "VARCHAR(100)", nullable = false)
     private String restaurantId;
 
