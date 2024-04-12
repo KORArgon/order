@@ -9,27 +9,31 @@
 <body>
 <th:block th:include="/.include/menu.html"></th:block>
 <div class="container">
-    <h2>메뉴 등록</h2>
+    <h2>메뉴 수정</h2>
     <form id="foodMenuRegistForm" name="foodMenuRegistForm" action="./foodMenuRegist" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="foodMenuNo" id="foodMenuNo" th:value="${foodMenu.foodMenuNo}" required>
+        <input type="hidden" name="foodImgName" id="foodImgName" th:value="${foodMenu.foodImgName}" required>
+        <input type="hidden" name="foodImgStoreName" id="foodImgStoreName" th:value="${foodMenu.foodImgStoreName}" required>
+        <input type="hidden" name="foodImgPath" id="foodImgPath" th:value="${foodMenu.foodImgPath}" required>
         <div class="form-group">
             <label for="foodMenuNm">메뉴명:</label>
-            <input type="text" id="foodMenuNm" name="foodMenuNm" required>
+            <input type="text" id="foodMenuNm" name="foodMenuNm" th:value="${foodMenu.foodMenuNm}" required>
         </div>
         <div class="form-group">
             <label for="foodMenuPrice">메뉴가격:</label>
-            <input type="text" id="foodMenuPrice" name="foodMenuPrice" required>
+            <input type="text" id="foodMenuPrice" name="foodMenuPrice" th:value="${foodMenu.foodMenuPrice}" required>
         </div>
         <div class="form-group">
             <label for="menuCategory">메뉴카테고리:</label>
-            <input type="text" id="menuCategory" name="menuCategory" required>
+            <input type="text" id="menuCategory" name="menuCategory" th:value="${foodMenu.menuCategory}" required>
         </div>
         <div class="form-group">
             <label for="popularAt">인기메뉴 여부:</label>
-            <input type="text" id="popularAt" name="popularAt" required>
+            <input type="text" id="popularAt" name="popularAt" th:value="${foodMenu.popularAt}" required>
         </div>
         <div class="form-group">
             <label for="foodMenuTitle">타이틀:</label>
-            <input type="text" id="foodMenuTitle" name="foodMenuTitle" required>
+            <input type="text" id="foodMenuTitle" name="foodMenuTitle" th:value="${foodMenu.foodMenuTitle}" required>
         </div>
         <div class="form-group">
             <label>메뉴 이미지:</label>

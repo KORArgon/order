@@ -9,12 +9,12 @@
 <body>
 <th:block th:include="/.include/menu.html"></th:block>
 <div class="container">
-    <h2>회원 상세</h2>
+    <h2>메뉴 상세</h2>
     <div class="details">
         <p><strong>메뉴명:</strong>[[${foodMenu.foodMenuNm}]]</p>
     </div>
     <div class="buttons">
-        <button class="button-normal" th:onclick="|location.href='@{/foodMenuUpdateForm(foodMenuId=${foodMenu.foodMenuId})}'|">수정</button>
+        <button class="button-normal" th:onclick="|location.href='@{/foodMenuUpdateForm(foodMenuNo=${foodMenu.foodMenuNo})}'|">수정</button>
     </div>
 </div>
 </body>
