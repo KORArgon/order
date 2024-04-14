@@ -199,3 +199,9 @@ button:hover {
 .pagination a:last-child {
     margin-left: 10px;
 }
+.item-image {
+    width: 200px;
+    height: auto;
+    display: block;
+    margin-top: 10px;
+}

@@ -12,6 +12,11 @@
     <h2>메뉴 상세</h2>
     <div class="details">
         <p><strong>메뉴명:</strong>[[${foodMenu.foodMenuNm}]]</p>
+        <p><strong>메뉴명:</strong>[[${foodMenu.foodMenuNm}]]</p>
+        <p><strong>메뉴명:</strong>[[${foodMenu.foodMenuNm}]]</p>
+        <p><strong>가격:</strong>[[${foodMenu.foodMenuPrice}]]</p>
+        <p><strong>Image:</strong></p>
+        <img th:src="${foodMenu.foodImgPath}+${foodMenu.foodImgStoreName}" alt="Item 1" class="item-image">
     </div>
     <div class="buttons">
         <button class="button-normal" th:onclick="|location.href='@{/foodMenuUpdateForm(foodMenuNo=${foodMenu.foodMenuNo})}'|">수정</button>
