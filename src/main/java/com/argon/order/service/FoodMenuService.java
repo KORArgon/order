@@ -59,7 +59,7 @@ public class FoodMenuService {
         foodMenu.setRestaurantId(LoginUtil.getRestaurantId(request));
         foodMenu.setFoodImgName(file.getOriginalFilename());
         foodMenu.setFoodImgStoreName(DateUtil.getTodateTime()+uuid+"."+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1));
-        foodMenu.setFoodImgPath("upload/foodMenu/");
+        foodMenu.setFoodImgPath("/upload/foodMenu/");
         FileUtil.getFileUploadAtchmnfl(file.getInputStream(), filePath+foodMenu.getFoodImgPath(), foodMenu.getFoodImgStoreName());
         if(foodMenu.getFoodMenuNo() == null || foodMenu.getFoodMenuNo() == 0){
             foodMenu.setRegistDate(DateUtil.getTodateTime());

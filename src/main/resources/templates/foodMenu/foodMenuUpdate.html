@@ -10,7 +10,7 @@
 <th:block th:include="/.include/menu.html"></th:block>
 <div class="container">
     <h2>메뉴 수정</h2>
-    <form id="foodMenuRegistForm" name="foodMenuRegistForm" action="./foodMenuRegist" method="post" enctype="multipart/form-data">
+    <form id="foodMenuRegistForm" name="foodMenuRegistForm" th:action="@{./foodMenuUpdate}" th:method="put" enctype="multipart/form-data">
         <input type="hidden" name="foodMenuNo" id="foodMenuNo" th:value="${foodMenu.foodMenuNo}" required>
         <input type="hidden" name="foodImgName" id="foodImgName" th:value="${foodMenu.foodImgName}" required>
         <input type="hidden" name="foodImgStoreName" id="foodImgStoreName" th:value="${foodMenu.foodImgStoreName}" required>
@@ -39,9 +39,9 @@
             <label>메뉴 이미지:</label>
             <label for="fileUpload" class="file-label">파일 업로드</label>
             <input type="file" id="fileUpload" name="fileUpload" class="file-input" onchange="displayFileName()">
-            <span id="fileName">선택된 파일 없음</span>
+            <span id="fileName">[[${foodMenu.foodImgName}]]</span>
         </div>
-        <button class="button-normal" type="submit">등록</button>
+        <button class="button-normal" type="submit">수정</button>
     </form>
 </div>
 <script>

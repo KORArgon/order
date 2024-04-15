@@ -42,10 +42,10 @@ public class FoodMenu {
     @Column(name = "FOOD_IMG_PATH", columnDefinition = "VARCHAR(400)")
     private String foodImgPath;
 
-    @Column(name = "REGIST_DATE", columnDefinition = "CHAR(14)", nullable = false)
+    @Column(name = "REGIST_DATE", columnDefinition = "CHAR(14)")
     private String registDate;
 
-    @Column(name = "REGIST_ID", columnDefinition = "VARCHAR(20)", nullable = false)
+    @Column(name = "REGIST_ID", columnDefinition = "VARCHAR(20)")
     private String registId;
 
     @Column(name = "UPDATE_DATE", columnDefinition = "CHAR(14)")
