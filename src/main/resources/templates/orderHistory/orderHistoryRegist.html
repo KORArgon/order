@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지</title>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+<th:block th:include="/.include/menu.html"></th:block>
+<div class="container">
+    <h2>주문내역 등록</h2>
+    <form id="orderHistoryRegistForm" name="orderHistoryRegistForm" action="./orderHistoryRegist" method="post">
+        <div class="form-group">
+            <label for="orderHistoryNm">주문내역명:</label>
+            <input type="text" name="orderHistoryNm" id="orderHistoryNm" required>
+        </div>
+        <button class="button-normal" type="submit">등록</button>
+    </form>
+</div>
+</body>
+</html>

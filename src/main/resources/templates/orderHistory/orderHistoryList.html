@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지</title>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+<th:block th:include="/.include/menu.html"></th:block>
+<div class="container">
+    <h2>주문내역 목록</h2>
+    <table class="item-table">
+        <colgroup>
+            <col width="10%">
+            <col width="70%"/>
+            <col width="10%"/>
+            <col width="10%"/>
+        </colgroup>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>주문내역명</th>
+            <th colspan="2">관리</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="orderHistory, status : ${orderHistoryList}">
+            <td th:text="${totCnt-status.index-10*(nowPage-1)}"></td>
+            <td><a th:href="@{/orderHistoryViewForm(orderHistoryId=${orderHistory.orderHistoryId})}" th:text="${orderHistory.orderHistoryNm}"></a></td>
+            <td><button class="button-small" th:onclick="|location.href='@{/orderHistoryUpdateForm(orderHistoryId=${orderHistory.orderHistoryId})}'|">수정</button></td>
+            <td>
+                <form id="delete_form" th:action="@{/orderHistoryDelete}" th:method="delete">
+                    <input type="hidden" name="orderHistoryNo" id="orderHistoryNo" th:value="${orderHistory.orderHistoryNo}">
+                    <button type="submit" class="button-small">삭제</button>
+                </form>
+            </td>
+        </tr>
+        <th:block th:if="${totCnt eq 0}">
+            <tr>
+                <td colspan="4">결과가 없습니다.</td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <div>
+        <button class="button-normal" onclick="location.href='./orderHistoryRegistForm'">등록</button>
+    </div>
+    <div class="pagination">
+        <a th:href="@{/orderHistoryListForm(page=0)}">최초페이지</a>
+        <th:block th:if="${nowPage != 1}"><a th:href="@{/orderHistoryListForm(page=${nowPage-2})}">이전페이지</a></th:block>
+        <th:block th:if="${nowPage == 1}"><a th:href="@{/orderHistoryListForm(page=0)}">이전페이지</a></th:block>
+        <th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
+            <th:block th:if="${endPage >= nowPage }">
+                <a th:if="${page != nowPage}" th:href="@{/orderHistoryListForm(page=${page-1})}" th:text ="${page}"></a>
+                <strong th:if="${page==nowPage}" th:text ="${page}"></strong>
+            </th:block>
+        </th:block>
+        <th:block th:if="${nowPage != totalPages}"><a th:href="@{/orderHistoryListForm(page=${nowPage})}">다음페이지</a></th:block>
+        <th:block th:if="${nowPage == totalPages}"><a th:href="@{/orderHistoryListForm(page=${totalPages-1})}">다음페이지</a></th:block>
+        <a th:href="@{/orderHistoryListForm(page=${totalPages-1})}">마지막페이지</a>
+    </div>
+</div>
+</body>
+</html>

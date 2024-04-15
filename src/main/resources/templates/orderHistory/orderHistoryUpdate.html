@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지</title>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+<th:block th:include="/.include/menu.html"></th:block>
+<div class="container">
+    <h2>주문내역 수정</h2>
+    <form id="orderHistoryUpdateForm" name="orderHistoryUpdateForm" th:action="@{./orderHistoryUpdate}" th:method="put">
+        <input type="hidden" name="orderHistoryNo" id="orderHistoryNo" th:value="${orderHistory.orderHistoryNo}">
+        <div class="form-group">
+            <label for="orderHistoryNm">주문내역명:</label>
+            <input type="text" name="orderHistoryNm" id="orderHistoryNm" th:value="${orderHistory.orderHistoryNm}" required>
+        </div>
+        <button class="button-normal" type="submit">수정</button>
+    </form>
+</div>
+</body>
+</html>
