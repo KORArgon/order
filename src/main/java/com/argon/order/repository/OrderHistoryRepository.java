@@ -9,4 +9,6 @@ public interface OrderHistoryRepository extends JpaRepository<OrderHistory, Long
     OrderHistory findByOrderId(String id);
 
     Page<OrderHistory> findByRestaurantId(Pageable pageable, String restaurantId);
+
+    OrderHistory findByOrderHistoryNo(Long orderHistoryNo);
 }

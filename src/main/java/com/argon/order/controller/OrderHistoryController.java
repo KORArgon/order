@@ -1,7 +1,9 @@
 package com.argon.order.controller;
 
 import com.argon.order.domain.OrderHistory;
+import com.argon.order.domain.OrderHistoryMenu;
 import com.argon.order.service.MessageService;
+import com.argon.order.service.OrderHistoryMenuService;
 import com.argon.order.service.OrderHistoryService;
 import com.argon.order.util.PagingUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,11 +26,14 @@ public class OrderHistoryController {
     // orderHistoryService
     private final OrderHistoryService orderHistoryService;
 
+    // orderHistoryMenuService
+    private final OrderHistoryMenuService orderHistoryMenuService;
+
     // messageService
     private final MessageService messageService;
 
     /**
-     * 식당 목록 조회
+     * 주문내역 목록 조회
      * @param model
      * @return
      */
@@ -42,7 +47,7 @@ public class OrderHistoryController {
     }
 
     /**
-     * 식당 상세 조회
+     * 주문내역 상세 조회
      * @param orderHistory
      * @param model
      * @return
@@ -55,7 +60,7 @@ public class OrderHistoryController {
     }
 
     /**
-     * 식당 등록 페이지
+     * 주문내역 등록 페이지
      * @return
      */
     @GetMapping("/orderHistoryRegistForm")
@@ -64,19 +69,30 @@ public class OrderHistoryController {
     }
 
     /**
-     * 식당 등록 처리
+     * 주문내역 등록 처리
      * @param orderHistory
      * @param model
+     * @param foodMenuNo
+     * @param orderCnt
      * @return
      */
     @PostMapping("/orderHistoryRegist")
-    public String orderHistoryRegist(OrderHistory orderHistory, Model model){
+    public String orderHistoryRegist(OrderHistory orderHistory, Model model, int[] foodMenuNo, int[] orderCnt){
         orderHistoryService.save(orderHistory);
+        OrderHistoryMenu orderHistoryMenu;
+        for(int i=0; i<foodMenuNo.length; i++){
+            orderHistoryMenu = new OrderHistoryMenu();
+            orderHistoryMenu.setOrderId(orderHistory.getOrderId());
+            orderHistoryMenu.setFoodMenuNo(foodMenuNo[i]);
+            orderHistoryMenu.setOrderCnt(orderCnt[i]);
+            orderHistoryMenuService.save(orderHistoryMenu);
+        }
+
         return messageService.redirectMessage(model, "등록을 완료했습니다.", "/orderHistoryListForm");
     }
 
     /**
-     * 식당 수정 페이지
+     * 주문내역 수정 페이지
      * @param orderHistory
      * @param model
      * @return
@@ -89,7 +105,7 @@ public class OrderHistoryController {
     }
 
     /**
-     * 식당 수정 처리
+     * 주문내역 수정 처리
      * @param orderHistory
      * @param model
      * @return
@@ -101,7 +117,7 @@ public class OrderHistoryController {
     }
 
     /**
-     * 식당 삭제 처리
+     * 주문내역 삭제 처리
      * @param orderHistory
      * @param model
      * @return

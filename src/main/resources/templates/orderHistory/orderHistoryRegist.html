@@ -12,9 +12,36 @@
     <h2>주문내역 등록</h2>
     <form id="orderHistoryRegistForm" name="orderHistoryRegistForm" action="./orderHistoryRegist" method="post">
         <div class="form-group">
-            <label for="orderHistoryNm">주문내역명:</label>
-            <input type="text" name="orderHistoryNm" id="orderHistoryNm" required>
+            <label for="orderId">주문ID:</label>
+            <input type="text" name="orderId" id="orderId" required>
         </div>
+        <div class="form-group">
+            <label for="restaurantId">식당ID:</label>
+            <input type="text" name="restaurantId" id="restaurantId" required>
+        </div>
+        <div class="form-group">
+            <label for="tableNo">테이블 번호:</label>
+            <input type="text" name="tableNo" id="tableNo" required>
+        </div>
+
+        <div class="form-group">
+            <label for="foodMenuNo1">메뉴 번호1:</label>
+            <input type="text" name="foodMenuNo" id="foodMenuNo1" required>
+        </div>
+        <div class="form-group">
+            <label for="orderCnt1">메뉴 수량1:</label>
+            <input type="text" name="orderCnt" id="orderCnt1" required>
+        </div>
+        <div class="form-group">
+            <label for="foodMenuNo2">메뉴 번호2:</label>
+            <input type="text" name="foodMenuNo" id="foodMenuNo2" required>
+        </div>
+        <div class="form-group">
+            <label for="orderCnt2">메뉴 수량2:</label>
+            <input type="text" name="orderCnt" id="orderCnt2" required>
+        </div>
+
+
         <button class="button-normal" type="submit">등록</button>
     </form>
 </div>

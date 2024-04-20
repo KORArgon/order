@@ -45,19 +45,13 @@ public class OrderHistoryService {
      * @param orderHistory
      */
     public void save(OrderHistory orderHistory) {
-        /*if(orderHistoryRepository.findByOrderHistoryId(orderHistory.getOrderHistoryId()) == null){
-            StringBuffer sb = new StringBuffer();
-            if(LoginUtil.getLoginIsAdmin()) sb.append("A");
-            if(!LoginUtil.getLoginIsAdmin()) sb.append("B");
-            sb.append(DateUtil.getTodateTime());
-            sb.append(String.format("%04d",orderHistoryRepository.selectOrderHistoryNo()));
-            orderHistory.setOrderHistoryId(sb.toString());
+        if(orderHistoryRepository.findByOrderHistoryNo(orderHistory.getOrderHistoryNo()) == null){
             orderHistory.setRegistDate(DateUtil.getTodateTime());
             orderHistory.setRegistId(LoginUtil.getLoingId());
         }   else {
             orderHistory.setUpdateDate(DateUtil.getTodateTime());
             orderHistory.setUpdateId(LoginUtil.getLoingId());
-        }*/
+        }
 
         orderHistoryRepository.save(orderHistory);
 
