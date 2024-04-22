@@ -17,7 +17,7 @@
         <p><strong>인기메뉴 여부:</strong>[[${foodMenu.popularAt}]]</p>
         <p><strong>타이틀:</strong>[[${foodMenu.foodMenuTitle}]]</p>
         <p><strong>Image:</strong></p>
-        <img th:src="${foodMenu.foodImgPath}+${foodMenu.foodImgStoreName}" th:alt="${foodMenu.foodImgName}" class="item-image">
+        <img th:src="${@environment.getProperty('order.upload.path')}+${foodMenu.foodImgPath}+${foodMenu.foodImgStoreName}" th:alt="${foodMenu.foodImgName}" class="item-image">
     </div>
     <div class="buttons">
         <button class="button-normal" th:onclick="|location.href='@{/foodMenuUpdateForm(foodMenuNo=${foodMenu.foodMenuNo})}'|">수정</button>

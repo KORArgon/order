@@ -82,7 +82,7 @@ public class FoodMenuController {
         try {
             foodMenuService.save(foodMenu, request);
         } catch (IOException e) {
-            messageService.backMessage(model, "등록에 실패했습니다.");
+            return messageService.backMessage(model, "등록에 실패했습니다.");
         }
         return messageService.redirectMessage(model, "등록을 완료했습니다.", "/foodMenuListForm");
     }
@@ -111,7 +111,7 @@ public class FoodMenuController {
         try {
             foodMenuService.save(foodMenu, request);
         } catch (IOException e) {
-            messageService.backMessage(model, "수정에 실패했습니다.");
+            return messageService.backMessage(model, "수정에 실패했습니다.");
         }
         return messageService.redirectMessage(model, "수정을 완료했습니다.", "/foodMenuListForm");
     }
