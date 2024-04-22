@@ -19,7 +19,7 @@ public class LoginController {
 
     @GetMapping("/loginForm")
     public String loginForm(){
-        return "/login/loginView";
+        return "login/loginView";
     }
 
     @GetMapping("/loginError")

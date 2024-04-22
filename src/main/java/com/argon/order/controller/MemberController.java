@@ -39,7 +39,7 @@ public class MemberController {
         model.addAttribute("totCnt",memberList.getTotalElements());
         model.addAttribute("memberList", memberList);
         PagingUtil.getPaginationInfo(model, memberList);
-        return "/member/memberList";
+        return "member/memberList";
     }
 
     /**
@@ -52,7 +52,7 @@ public class MemberController {
     public String memberViewForm(Member member, Model model){
         Member result = memberService.findById(member.getMemberId());
         model.addAttribute("member", result);
-        return "/member/memberView";
+        return "member/memberView";
     }
 
     /**
@@ -61,7 +61,7 @@ public class MemberController {
      */
     @GetMapping("/memberRegistForm")
     public String memberRegistForm(){
-        return "/member/memberRegist";
+        return "member/memberRegist";
     }
 
     /**
@@ -86,7 +86,7 @@ public class MemberController {
     public String memberUpdateForm(Member member, Model model){
         Member result = memberService.findById(member.getMemberId());
         model.addAttribute("member", result);
-        return "/member/memberUpdate";
+        return "member/memberUpdate";
     }
 
     /**

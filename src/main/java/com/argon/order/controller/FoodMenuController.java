@@ -46,7 +46,7 @@ public class FoodMenuController {
         model.addAttribute("foodMenuList", foodMenuList);
         PagingUtil.getPaginationInfo(model, foodMenuList);
 
-        return "/foodMenu/foodMenuList";
+        return "foodMenu/foodMenuList";
     }
 
     /**
@@ -59,7 +59,7 @@ public class FoodMenuController {
     public String foodMenuViewForm(FoodMenu foodMenu, Model model){
         FoodMenu result = foodMenuService.findById(foodMenu.getFoodMenuNo());
         model.addAttribute("foodMenu", result);
-        return "/foodMenu/foodMenuView";
+        return "foodMenu/foodMenuView";
     }
 
     /**
@@ -68,7 +68,7 @@ public class FoodMenuController {
      */
     @GetMapping("/foodMenuRegistForm")
     public String foodMenuRegistForm(){
-        return "/foodMenu/foodMenuRegist";
+        return "foodMenu/foodMenuRegist";
     }
 
     /**
@@ -97,7 +97,7 @@ public class FoodMenuController {
     public String foodMenuUpdateForm(FoodMenu foodMenu, Model model){
         FoodMenu result = foodMenuService.findById(foodMenu.getFoodMenuNo());
         model.addAttribute("foodMenu", result);
-        return "/foodMenu/foodMenuUpdate";
+        return "foodMenu/foodMenuUpdate";
     }
 
     /**

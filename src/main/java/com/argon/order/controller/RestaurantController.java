@@ -37,7 +37,7 @@ public class RestaurantController {
         model.addAttribute("totCnt",restaurantList.getTotalElements());
         model.addAttribute("restaurantList", restaurantList);
         PagingUtil.getPaginationInfo(model, restaurantList);
-        return "/restaurant/restaurantList";
+        return "restaurant/restaurantList";
     }
 
     /**
@@ -50,7 +50,7 @@ public class RestaurantController {
     public String restaurantViewForm(Restaurant restaurant, Model model){
         Restaurant result = restaurantService.findByRestaurantId(restaurant.getRestaurantId());
         model.addAttribute("restaurant", result);
-        return "/restaurant/restaurantView";
+        return "restaurant/restaurantView";
     }
 
     /**
@@ -59,7 +59,7 @@ public class RestaurantController {
      */
     @GetMapping("/restaurantRegistForm")
     public String restaurantRegistForm(){
-        return "/restaurant/restaurantRegist";
+        return "restaurant/restaurantRegist";
     }
 
     /**
@@ -84,7 +84,7 @@ public class RestaurantController {
     public String restaurantUpdateForm(Restaurant restaurant, Model model){
         Restaurant result = restaurantService.findByRestaurantId(restaurant.getRestaurantId());
         model.addAttribute("restaurant", result);
-        return "/restaurant/restaurantUpdate";
+        return "restaurant/restaurantUpdate";
     }
 
     /**

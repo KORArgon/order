@@ -43,7 +43,7 @@ public class OrderHistoryController {
         model.addAttribute("totCnt",orderHistoryList.getTotalElements());
         model.addAttribute("orderHistoryList", orderHistoryList);
         PagingUtil.getPaginationInfo(model, orderHistoryList);
-        return "/orderHistory/orderHistoryList";
+        return "orderHistory/orderHistoryList";
     }
 
     /**
@@ -56,7 +56,7 @@ public class OrderHistoryController {
     public String orderHistoryViewForm(OrderHistory orderHistory, Model model){
         OrderHistory result = orderHistoryService.findByOrderId(orderHistory.getOrderId());
         model.addAttribute("orderHistory", result);
-        return "/orderHistory/orderHistoryView";
+        return "orderHistory/orderHistoryView";
     }
 
     /**
@@ -65,7 +65,7 @@ public class OrderHistoryController {
      */
     @GetMapping("/orderHistoryRegistForm")
     public String orderHistoryRegistForm(){
-        return "/orderHistory/orderHistoryRegist";
+        return "orderHistory/orderHistoryRegist";
     }
 
     /**
@@ -101,7 +101,7 @@ public class OrderHistoryController {
     public String orderHistoryUpdateForm(OrderHistory orderHistory, Model model){
         OrderHistory result = orderHistoryService.findByOrderId(orderHistory.getOrderId());
         model.addAttribute("orderHistory", result);
-        return "/orderHistory/orderHistoryUpdate";
+        return "orderHistory/orderHistoryUpdate";
     }
 
     /**

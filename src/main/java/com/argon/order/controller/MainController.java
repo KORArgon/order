@@ -12,7 +12,7 @@ public class MainController {
     }
 
     @GetMapping("/main")
-    public String main(){return "/admin/main";
+    public String main(){return "admin/main";
     }
 
 }
