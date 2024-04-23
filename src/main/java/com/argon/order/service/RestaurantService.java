@@ -45,7 +45,7 @@ public class RestaurantService {
      */
     public void save(Restaurant restaurant) {
         restaurant.setMemberId(LoginUtil.getLoingId());
-        if(restaurantRepository.findByRestaurantId(restaurant.getRestaurantId()) == null){
+        if(restaurant.getRestaurantNo() == null){
             StringBuffer sb = new StringBuffer();
             if(LoginUtil.getLoginIsAdmin()) sb.append("A");
             if(!LoginUtil.getLoginIsAdmin()) sb.append("B");

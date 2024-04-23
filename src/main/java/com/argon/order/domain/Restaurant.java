@@ -15,10 +15,10 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long restaurantNo;
 
-    @Column(name = "MEMBER_ID", columnDefinition = "VARCHAR(20)", nullable = false)
+    @Column(name = "MEMBER_ID", columnDefinition = "VARCHAR(20)", nullable = false, updatable=false)
     private String memberId;
 
-    @Column(name = "RESTAURANT_ID", columnDefinition = "VARCHAR(100)", nullable = false)
+    @Column(name = "RESTAURANT_ID", columnDefinition = "VARCHAR(100)", nullable = false, updatable=false)
     private String restaurantId;
 
     @Column(name = "RESTAURANT_NM", columnDefinition = "VARCHAR(200)", nullable = false)
