@@ -13,22 +13,25 @@
     <table class="item-table">
         <colgroup>
             <col width="10%">
-            <col width="70%"/>
+            <col width="10%"/>
+            <col width="50%"/>
             <col width="10%"/>
             <col width="10%"/>
         </colgroup>
         <thead>
         <tr>
             <th>번호</th>
-            <th>주문내역명</th>
+            <th>테이블 번호</th>
+            <th>주문번호</th>
             <th colspan="2">관리</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="orderHistory, status : ${orderHistoryList}">
             <td th:text="${totCnt-status.index-10*(nowPage-1)}"></td>
-            <td><a th:href="@{/orderHistoryViewForm(orderHistoryId=${orderHistory.orderHistoryId})}" th:text="${orderHistory.orderHistoryNm}"></a></td>
-            <td><button class="button-small" th:onclick="|location.href='@{/orderHistoryUpdateForm(orderHistoryId=${orderHistory.orderHistoryId})}'|">수정</button></td>
+            <td><a th:text="${orderHistory.tableNo}"></a></td>
+            <td><a th:href="@{/orderHistoryViewForm(orderHistoryNo=${orderHistory.orderHistoryNo})}" th:text="${orderHistory.orderId}"></a></td>
+            <td><button class="button-small" th:onclick="|location.href='@{/orderHistoryUpdateForm(orderHistoryNo=${orderHistory.orderHistoryNo})}'|">수정</button></td>
             <td>
                 <form id="delete_form" th:action="@{/orderHistoryDelete}" th:method="delete">
                     <input type="hidden" name="orderHistoryNo" id="orderHistoryNo" th:value="${orderHistory.orderHistoryNo}">
