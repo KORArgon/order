@@ -30,7 +30,7 @@
         <tr th:each="orderHistory, status : ${orderHistoryList}">
             <td th:text="${totCnt-status.index-10*(nowPage-1)}"></td>
             <td><a th:text="${orderHistory.tableNo}"></a></td>
-            <td><a th:href="@{/orderHistoryViewForm(orderHistoryNo=${orderHistory.orderHistoryNo})}" th:text="${orderHistory.orderId}"></a></td>
+            <td><a th:href="@{/orderHistoryViewForm(orderId=${orderHistory.orderId})}" th:text="${orderHistory.orderId}"></a></td>
             <td><button class="button-small" th:onclick="|location.href='@{/orderHistoryUpdateForm(orderHistoryNo=${orderHistory.orderHistoryNo})}'|">수정</button></td>
             <td>
                 <form id="delete_form" th:action="@{/orderHistoryDelete}" th:method="delete">

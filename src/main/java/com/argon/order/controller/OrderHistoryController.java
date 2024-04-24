@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class OrderHistoryController {
@@ -56,6 +58,9 @@ public class OrderHistoryController {
     public String orderHistoryViewForm(OrderHistory orderHistory, Model model){
         OrderHistory result = orderHistoryService.findByOrderId(orderHistory.getOrderId());
         model.addAttribute("orderHistory", result);
+
+        List<OrderHistoryMenu> orderHistoryMenuList = orderHistoryService.selectOrderHistoryMenuList(orderHistory.getOrderId());
+
         return "orderHistory/orderHistoryView";
     }
 

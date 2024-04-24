@@ -1,6 +1,7 @@
 package com.argon.order.service;
 
 import com.argon.order.domain.OrderHistory;
+import com.argon.order.domain.OrderHistoryMenu;
 import com.argon.order.repository.OrderHistoryRepository;
 import com.argon.order.util.DateUtil;
 import com.argon.order.util.LoginUtil;
@@ -9,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -64,5 +67,8 @@ public class OrderHistoryService {
     public void orderHistoryDelete(OrderHistory orderHistory) {
         orderHistoryRepository.delete(orderHistory);
     }
-    
+
+    public List<OrderHistoryMenu> selectOrderHistoryMenuList(String orderId) {
+        return orderHistoryRepository.selectOrderHistoryMenuList(orderId);
+    }
 }

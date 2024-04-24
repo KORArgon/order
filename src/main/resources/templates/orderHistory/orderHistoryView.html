@@ -11,10 +11,10 @@
 <div class="container">
     <h2>주문내역 상세</h2>
     <div class="details">
-        <p><strong>주문내역명:</strong>[[${orderHistory.orderHistoryNm}]]</p>
+        <p><strong>주문내역명:</strong>[[${orderHistory.orderHistoryNo}]]</p>
     </div>
     <div class="buttons">
-        <button class="button-normal" th:onclick="|location.href='@{/orderHistoryUpdateForm(orderHistoryId=${orderHistory.orderHistoryId})}'|">수정</button>
+        <button class="button-normal" th:onclick="|location.href='@{/orderHistoryUpdateForm(orderId=${orderHistory.orderId})}'|">수정</button>
     </div>
 </div>
 </body>
