@@ -59,8 +59,8 @@ public class OrderHistoryController {
         OrderHistory result = orderHistoryService.findByOrderId(orderHistory.getOrderId());
         model.addAttribute("orderHistory", result);
 
-        List<OrderHistoryMenu> orderHistoryMenuList = orderHistoryService.selectOrderHistoryMenuList(orderHistory.getOrderId());
-
+        List<Object> orderHistoryMenuList = orderHistoryService.selectOrderHistoryMenuList(orderHistory.getOrderId());
+        model.addAttribute("orderHistoryMenuList", orderHistoryMenuList);
         return "orderHistory/orderHistoryView";
     }
 

@@ -11,7 +11,11 @@
 <div class="container">
     <h2>주문내역 상세</h2>
     <div class="details">
-        <p><strong>주문내역명:</strong>[[${orderHistory.orderHistoryNo}]]</p>
+        <p><strong>주문ID:</strong>[[${orderHistory.orderId}]]</p>
+        <p><strong>테이블번호:</strong>[[${orderHistory.tableNo}]]</p>
+        <th:block th:each="orderHistoryMenu, status : ${orderHistoryMenuList}">
+            <p><strong>테이블번호:</strong>[[${orderHistoryMenu[1].foodMenuNm}]]</p>
+        </th:block>
     </div>
     <div class="buttons">
         <button class="button-normal" th:onclick="|location.href='@{/orderHistoryUpdateForm(orderId=${orderHistory.orderId})}'|">수정</button>

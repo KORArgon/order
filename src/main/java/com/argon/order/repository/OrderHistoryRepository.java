@@ -17,6 +17,8 @@ public interface OrderHistoryRepository extends JpaRepository<OrderHistory, Long
 
     OrderHistory findByOrderHistoryNo(Long orderHistoryNo);
 
-    @Query("SELECT ohm FROM OrderHistoryMenu OHM WHERE ohm.orderId = :orderId ORDER BY ohm.orderHistoryMenuNo")
-    List<OrderHistoryMenu> selectOrderHistoryMenuList(@Param("orderId") String orderId);
+    @Query("SELECT ohm, fm FROM OrderHistoryMenu ohm " +
+            "LEFT JOIN FoodMenu fm ON ohm.foodMenuNo = fm.foodMenuNo " +
+            "WHERE ohm.orderId = :orderId ORDER BY ohm.orderHistoryMenuNo")
+    List<Object> selectOrderHistoryMenuList(@Param("orderId") String orderId);
 }

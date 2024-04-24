@@ -68,7 +68,7 @@ public class OrderHistoryService {
         orderHistoryRepository.delete(orderHistory);
     }
 
-    public List<OrderHistoryMenu> selectOrderHistoryMenuList(String orderId) {
+    public List<Object> selectOrderHistoryMenuList(String orderId) {
         return orderHistoryRepository.selectOrderHistoryMenuList(orderId);
     }
 }
