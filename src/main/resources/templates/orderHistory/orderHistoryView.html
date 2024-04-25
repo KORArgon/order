@@ -13,8 +13,12 @@
     <div class="details">
         <p><strong>주문ID:</strong>[[${orderHistory.orderId}]]</p>
         <p><strong>테이블번호:</strong>[[${orderHistory.tableNo}]]</p>
+        <p>=====================================================================</p>
         <th:block th:each="orderHistoryMenu, status : ${orderHistoryMenuList}">
-            <p><strong>테이블번호:</strong>[[${orderHistoryMenu[1].foodMenuNm}]]</p>
+            <p><strong>메뉴명:</strong>[[${orderHistoryMenu[1].foodMenuNm}]]</p>
+            <p><strong>메뉴가격:</strong>[[${orderHistoryMenu[1].foodMenuPrice}]]</p>
+            <p><strong>주문수량:</strong>[[${orderHistoryMenu[0].orderCnt}]]</p>
+            <p>=====================================================================</p>
         </th:block>
     </div>
     <div class="buttons">
