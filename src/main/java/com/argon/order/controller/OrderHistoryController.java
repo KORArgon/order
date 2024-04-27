@@ -117,11 +117,12 @@ public class OrderHistoryController {
      * @return
      */
     @PutMapping("/orderHistoryUpdate")
-    public String orderHistoryUpdate(OrderHistory orderHistory, Model model, int[] foodMenuNo, int[] orderCnt){
+    public String orderHistoryUpdate(OrderHistory orderHistory, Model model,Long[] orderHistoryMenuNo, int[] foodMenuNo, int[] orderCnt){
         orderHistoryService.save(orderHistory);
         OrderHistoryMenu orderHistoryMenu;
         for(int i=0; i<foodMenuNo.length; i++){
             orderHistoryMenu = new OrderHistoryMenu();
+            orderHistoryMenu.setOrderHistoryMenuNo(orderHistoryMenuNo[i]);
             orderHistoryMenu.setOrderId(orderHistory.getOrderId());
             orderHistoryMenu.setFoodMenuNo(foodMenuNo[i]);
             orderHistoryMenu.setOrderCnt(orderCnt[i]);

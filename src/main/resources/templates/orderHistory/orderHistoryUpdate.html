@@ -26,9 +26,10 @@
         </div>
         <p>=====================================================================</p>
         <th:block th:each="orderHistoryMenu, status : ${orderHistoryMenuList}">
+            <input type="hidden" name="orderHistoryMenuNo" id="orderHistoryMenuNo" th:value="${orderHistoryMenu[0].orderHistoryMenuNo}">
             <div class="form-group">
                 <label for="foodMenuNo1">메뉴 번호1:</label>
-                <input type="text" name="foodMenuNo" id="foodMenuNo1" th:value="${orderHistoryMenu[1].foodMenuPrice}" required>
+                <input type="text" name="foodMenuNo" id="foodMenuNo1" th:value="${orderHistoryMenu[1].foodMenuNo}" required>
             </div>
             <div class="form-group">
                 <label for="orderCnt1">메뉴 수량1:</label>
