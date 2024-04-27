@@ -206,3 +206,28 @@ button:hover {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+/* Radio button styles */
+.radio-container {
+    display: flex;
+    flex-direction: row; /* 가로 방향으로 정렬 */
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* 라벨 간격 설정 */
+}
+
+.radio-label input[type="radio"] {
+    margin-right: 5px;
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+}
+
+.radio-label input[type="radio"]:checked + ::before {
+    background-color: #007bff;
+}
