@@ -13,7 +13,10 @@
     <div class="details">
         <p><strong>아이디:</strong>[[${member.memberId}]]</p>
         <p><strong>이름:</strong>[[${member.name}]]</p>
-        <p><strong>등급:</strong>[[${member.grade}]]</p>
+        <p><strong>등급:</strong>
+            <th:block th:if="${member.grade == 'ADMIN'}">관리자</th:block>
+            <th:block th:if="${member.grade == 'STAFF'}">사용자</th:block>
+        </p>
     </div>
     <div class="buttons">
         <button class="button-normal" th:onclick="|location.href='@{/memberUpdateForm(memberId=${member.memberId})}'|">수정</button>
