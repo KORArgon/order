@@ -58,7 +58,6 @@ public class OrderHistoryController {
     public String orderHistoryViewForm(OrderHistory orderHistory, Model model){
         OrderHistory result = orderHistoryService.findByOrderId(orderHistory.getOrderId());
         model.addAttribute("orderHistory", result);
-
         List<Object> orderHistoryMenuList = orderHistoryService.selectOrderHistoryMenuList(orderHistory.getOrderId());
         model.addAttribute("orderHistoryMenuList", orderHistoryMenuList);
         return "orderHistory/orderHistoryView";
@@ -106,6 +105,8 @@ public class OrderHistoryController {
     public String orderHistoryUpdateForm(OrderHistory orderHistory, Model model){
         OrderHistory result = orderHistoryService.findByOrderId(orderHistory.getOrderId());
         model.addAttribute("orderHistory", result);
+        List<Object> orderHistoryMenuList = orderHistoryService.selectOrderHistoryMenuList(orderHistory.getOrderId());
+        model.addAttribute("orderHistoryMenuList", orderHistoryMenuList);
         return "orderHistory/orderHistoryUpdate";
     }
 
@@ -116,8 +117,16 @@ public class OrderHistoryController {
      * @return
      */
     @PutMapping("/orderHistoryUpdate")
-    public String orderHistoryUpdate(OrderHistory orderHistory, Model model){
+    public String orderHistoryUpdate(OrderHistory orderHistory, Model model, int[] foodMenuNo, int[] orderCnt){
         orderHistoryService.save(orderHistory);
+        OrderHistoryMenu orderHistoryMenu;
+        for(int i=0; i<foodMenuNo.length; i++){
+            orderHistoryMenu = new OrderHistoryMenu();
+            orderHistoryMenu.setOrderId(orderHistory.getOrderId());
+            orderHistoryMenu.setFoodMenuNo(foodMenuNo[i]);
+            orderHistoryMenu.setOrderCnt(orderCnt[i]);
+            orderHistoryMenuService.save(orderHistoryMenu);
+        }
         return messageService.redirectMessage(model, "수정을 완료했습니다.", "/orderHistoryListForm");
     }
 

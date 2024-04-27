@@ -14,33 +14,28 @@
         <input type="hidden" name="orderHistoryNo" id="orderHistoryNo" th:value="${orderHistory.orderHistoryNo}">
         <div class="form-group">
             <label for="orderId">주문ID:</label>
-            <input type="text" name="orderId" id="orderId" required>
+            <input type="text" name="orderId" id="orderId" th:value="${orderHistory.orderId}" required>
         </div>
         <div class="form-group">
             <label for="restaurantId">식당ID:</label>
-            <input type="text" name="restaurantId" id="restaurantId" required>
+            <input type="text" name="restaurantId" id="restaurantId" th:value="${orderHistory.restaurantId}" required>
         </div>
         <div class="form-group">
             <label for="tableNo">테이블 번호:</label>
-            <input type="text" name="tableNo" id="tableNo" required>
+            <input type="text" name="tableNo" id="tableNo" th:value="${orderHistory.tableNo}" required>
         </div>
-
-        <div class="form-group">
-            <label for="foodMenuNo1">메뉴 번호1:</label>
-            <input type="text" name="foodMenuNo" id="foodMenuNo1" required>
-        </div>
-        <div class="form-group">
-            <label for="orderCnt1">메뉴 수량1:</label>
-            <input type="text" name="orderCnt" id="orderCnt1" required>
-        </div>
-        <div class="form-group">
-            <label for="foodMenuNo2">메뉴 번호2:</label>
-            <input type="text" name="foodMenuNo" id="foodMenuNo2" required>
-        </div>
-        <div class="form-group">
-            <label for="orderCnt2">메뉴 수량2:</label>
-            <input type="text" name="orderCnt" id="orderCnt2" required>
-        </div>
+        <p>=====================================================================</p>
+        <th:block th:each="orderHistoryMenu, status : ${orderHistoryMenuList}">
+            <div class="form-group">
+                <label for="foodMenuNo1">메뉴 번호1:</label>
+                <input type="text" name="foodMenuNo" id="foodMenuNo1" th:value="${orderHistoryMenu[1].foodMenuPrice}" required>
+            </div>
+            <div class="form-group">
+                <label for="orderCnt1">메뉴 수량1:</label>
+                <input type="text" name="orderCnt" id="orderCnt1" th:value="${orderHistoryMenu[0].orderCnt}" required>
+            </div>
+            <p>=====================================================================</p>
+        </th:block>
         <button class="button-normal" type="submit">수정</button>
     </form>
 </div>
