@@ -1,9 +1,9 @@
 package com.argon.order.config;
 
-import com.argon.order.interceptor.CommonInterceptor;
+import com.argon.order.interceptor.LoginInterceptor;
+import com.argon.order.interceptor.RestaurantInterceptor;
 import com.argon.order.repository.MemberRepository;
 import com.argon.order.repository.RestaurantRepository;
-import com.argon.order.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -23,8 +23,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new CommonInterceptor(memberRepository, restaurantRepository))
+        registry.addInterceptor(new LoginInterceptor(memberRepository, restaurantRepository))
                 .excludePathPatterns("/css/**", "/images/**", "/js/**");
+
+        registry.addInterceptor(new RestaurantInterceptor())
+                .addPathPatterns("/foodMenu**","/orderHistory**");
     }
 
     @Override
