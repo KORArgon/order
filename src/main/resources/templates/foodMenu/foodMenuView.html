@@ -13,9 +13,20 @@
     <div class="details">
         <p><strong>메뉴명:</strong>[[${foodMenu.foodMenuNm}]]</p>
         <p><strong>메뉴가격:</strong>[[${foodMenu.foodMenuPrice}]]</p>
-        <p><strong>메뉴카테고리:</strong>[[${foodMenu.menuCategory}]]</p>
-        <p><strong>인기메뉴 여부:</strong>[[${foodMenu.popularAt}]]</p>
-        <p><strong>타이틀:</strong>[[${foodMenu.foodMenuTitle}]]</p>
+        <p><strong>타이틀:</strong>
+            <th:block th:if="${foodMenu.foodMenuTitle == 'NEW'}">신규</th:block>
+            <th:block th:if="${foodMenu.foodMenuTitle == 'BEST'}">최고</th:block>
+            <th:block th:if="${foodMenu.foodMenuTitle == 'RECOMMEND'}">추천</th:block>
+        </p>
+        <p><strong>메뉴카테고리:</strong>
+            <th:block th:if="${foodMenu.menuCategory == 'MAIN'}">메인메뉴</th:block>
+            <th:block th:if="${foodMenu.menuCategory == 'SIDE'}">사이드메뉴</th:block>
+            <th:block th:if="${foodMenu.menuCategory == 'DRINK'}">주류/음료</th:block>
+        </p>
+        <p><strong>인기메뉴 여부:</strong>
+            <th:block th:if="${foodMenu.popularAt == 'Y'}">사용</th:block>
+            <th:block th:if="${foodMenu.popularAt == 'N'}">사용안함</th:block>
+        </p>
         <p><strong>Image:</strong></p>
         <img th:src="${@environment.getProperty('order.upload.path')}+${foodMenu.foodImgPath}+${foodMenu.foodImgStoreName}" th:alt="${foodMenu.foodImgName}" class="item-image">
     </div>

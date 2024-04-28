@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -57,9 +58,11 @@ public class FoodMenuService {
         UUID uuid = UUID.randomUUID();
         MultipartFile file = request.getFiles("fileUpload").get(0);
         foodMenu.setRestaurantId(LoginUtil.getRestaurantId(request));
-        foodMenu.setFoodImgName(file.getOriginalFilename());
-        foodMenu.setFoodImgStoreName(DateUtil.getTodateTime()+uuid+"."+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1));
-        foodMenu.setFoodImgPath("foodMenu/");
+        if(!Objects.requireNonNull(file.getOriginalFilename()).isEmpty()){
+            foodMenu.setFoodImgName(file.getOriginalFilename());
+            foodMenu.setFoodImgStoreName(DateUtil.getTodateTime()+uuid+"."+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1));
+            foodMenu.setFoodImgPath("foodMenu/");
+        }
         FileUtil.getFileUploadAtchmnfl(file.getInputStream(), filePath+foodMenu.getFoodImgPath(), foodMenu.getFoodImgStoreName());
         if(foodMenu.getFoodMenuNo() == null || foodMenu.getFoodMenuNo() == 0){
             foodMenu.setRegistDate(DateUtil.getTodateTime());

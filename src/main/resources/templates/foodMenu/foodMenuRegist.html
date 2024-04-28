@@ -17,20 +17,24 @@
         </div>
         <div class="form-group">
             <label for="foodMenuPrice">메뉴가격:</label>
-            <input type="text" id="foodMenuPrice" name="foodMenuPrice" required>
+            <input type="text" id="foodMenuPrice" name="foodMenuPrice" oninput="onlyNumber(this.id)" required>
         </div>
-        <div class="form-group">
-            <label for="menuCategory">메뉴카테고리:</label>
-            <input type="text" id="menuCategory" name="menuCategory" required>
+        <p>타이틀:</p>
+        <div class="radio-container">
+            <label class="radio-label"><input type="radio" id="foodMenuTitle1" name="foodMenuTitle" value="NEW"> 신규</label>
+            <label class="radio-label"><input type="radio" id="foodMenuTitle2" name="foodMenuTitle" value="BEST"> 최고</label>
+            <label class="radio-label"><input type="radio" id="foodMenuTitle3" name="foodMenuTitle" value="RECOMMEND"> 추천</label>
+        </div>
+        <p>메뉴카테고리:</p>
+        <div class="radio-container">
+            <label class="radio-label"><input type="radio" id="menuCategory1" name="menuCategory" value="MAIN"> 메인메뉴</label>
+            <label class="radio-label"><input type="radio" id="menuCategory2" name="menuCategory" value="SIDE"> 사이드메뉴</label>
+            <label class="radio-label"><input type="radio" id="menuCategory3" name="menuCategory" value="DRINK"> 주류/음료</label>
         </div>
         <p>인기메뉴 여부:</p>
         <div class="radio-container">
             <label class="radio-label"><input type="radio" id="popularAt1" name="popularAt" value="Y"> 사용</label>
             <label class="radio-label"><input type="radio" id="popularAt2" name="popularAt" value="N"> 사용안함</label>
-        </div>
-        <div class="form-group">
-            <label for="foodMenuTitle">타이틀:</label>
-            <input type="text" id="foodMenuTitle" name="foodMenuTitle" required>
         </div>
         <div class="form-group">
             <label>메뉴 이미지:</label>
