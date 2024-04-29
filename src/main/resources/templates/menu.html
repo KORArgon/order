@@ -13,7 +13,7 @@
             <select id="category"
                     th:onchange="restaurantIdLogin(this.value)"
             >
-                <option>식당 선택</option>
+                <option value="">식당 선택</option>
                 <th:block th:each="item : ${commonMap.restaurantList}">
                     <option th:value="${item.restaurantId}"
                             th:text="${item.restaurantNm}"

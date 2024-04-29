@@ -1,5 +1,6 @@
 package com.argon.order.interceptor;
 
+import com.argon.order.util.LoginUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +14,10 @@ public class RestaurantInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
-        // 세션에 식당ID 없는 경우 튕겨내기
+        if(LoginUtil.getRestaurantId(request) == null || LoginUtil.getRestaurantId(request).equals("")){
+            response.sendRedirect("/backMessageUnicode?message=/uc2dd/ub2f9/uc744/u0020/uc120/ud0dd/ud574/uc8fc/uc138/uc694/u002e");
+            return false;
+        }
 
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }

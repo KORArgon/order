@@ -4,6 +4,7 @@ import com.argon.order.interceptor.LoginInterceptor;
 import com.argon.order.interceptor.RestaurantInterceptor;
 import com.argon.order.repository.MemberRepository;
 import com.argon.order.repository.RestaurantRepository;
+import com.argon.order.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
