@@ -35,6 +35,7 @@
             <td>
                 <form id="delete_form" th:action="@{/orderHistoryDelete}" th:method="delete">
                     <input type="hidden" name="orderHistoryNo" id="orderHistoryNo" th:value="${orderHistory.orderHistoryNo}">
+                    <input type="hidden" name="orderId" id="orderId" th:value="${orderHistory.orderId}">
                     <button type="submit" class="button-small">삭제</button>
                 </form>
             </td>

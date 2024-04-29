@@ -139,6 +139,7 @@ public class OrderHistoryController {
      */
     @DeleteMapping("/orderHistoryDelete")
     public String orderHistoryDelete(OrderHistory orderHistory, Model model){
+        orderHistoryMenuService.orderHistoryMenuDelete(orderHistory.getOrderId());
         orderHistoryService.orderHistoryDelete(orderHistory);
         return messageService.redirectMessage(model, "삭제를 완료했습니다.", "/orderHistoryListForm");
     }

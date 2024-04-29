@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -49,10 +50,11 @@ public class OrderHistoryMenuService {
 
     /**
      * 삭제 처리
-     * @param orderHistorymenu
+     * @param orderId
      */
-    public void orderHistoryDelete(OrderHistoryMenu orderHistorymenu) {
-        orderHistoryMenuRepository.delete(orderHistorymenu);
+    @Transactional
+    public void orderHistoryMenuDelete(String orderId) {
+        orderHistoryMenuRepository.deleteByOrderId(orderId);
     }
     
 }

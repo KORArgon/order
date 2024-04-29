@@ -11,4 +11,6 @@ public interface OrderHistoryMenuRepository extends JpaRepository<OrderHistoryMe
     Page<OrderHistoryMenu> findByOrderId(Pageable pageable, String restaurantId);
 
     OrderHistoryMenu findByOrderHistoryMenuNo(Long orderHistoryMenuNo);
+
+    void deleteByOrderId(String orderId);
 }

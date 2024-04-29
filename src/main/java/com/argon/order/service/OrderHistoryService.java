@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -64,6 +65,7 @@ public class OrderHistoryService {
      * 삭제 처리
      * @param orderHistory
      */
+    @Transactional
     public void orderHistoryDelete(OrderHistory orderHistory) {
         orderHistoryRepository.delete(orderHistory);
     }
