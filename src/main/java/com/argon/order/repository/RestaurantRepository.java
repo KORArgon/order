@@ -14,4 +14,6 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
     @Query(value = "SELECT (RESTAURANT_NO)+1 FROM NT_RESTAURANT ORDER BY RESTAURANT_NO DESC LIMIT 1", nativeQuery = true)
     int selectRestaurantNo();
+
+    Restaurant findByMemberIdAndRestaurantId(String userId, String restaurantId);
 }

@@ -101,4 +101,8 @@ public class MemberService implements UserDetailsService {
         memberRepository.delete(member);
     }
 
+    public boolean memberCheck(String memberId, String password) {
+        Member member = memberRepository.findByMemberId(memberId);
+        return passwordEncoder.matches(password, member.getPassword());
+    }
 }

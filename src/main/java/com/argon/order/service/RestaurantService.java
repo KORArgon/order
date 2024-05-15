@@ -71,4 +71,7 @@ public class RestaurantService {
         restaurantRepository.delete(restaurant);
     }
 
+    public Restaurant findByMemberIdAndRestaurantId(String userId, String restaurantId) {
+        return restaurantRepository.findByMemberIdAndRestaurantId(userId, restaurantId);
+    }
 }
