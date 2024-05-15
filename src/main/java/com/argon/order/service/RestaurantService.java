@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class RestaurantService {
 
-    // restaurantService
+    // restaurantRepository
     private final RestaurantRepository restaurantRepository;
 
     // restaurantService

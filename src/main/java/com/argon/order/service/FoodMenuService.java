@@ -5,6 +5,7 @@ import com.argon.order.repository.FoodMenuRepository;
 import com.argon.order.util.DateUtil;
 import com.argon.order.util.FileUtil;
 import com.argon.order.util.LoginUtil;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -14,11 +15,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-@Service
+
 @Slf4j
+@RequiredArgsConstructor
+@Service
 public class FoodMenuService {
 
     @Value("${order.upload.path}")
@@ -26,11 +30,6 @@ public class FoodMenuService {
 
     // foodMenuService
     private final FoodMenuRepository foodMenuRepository;
-
-    // foodMenuService
-    public FoodMenuService(FoodMenuRepository foodMenuRepository) {
-        this.foodMenuRepository = foodMenuRepository;
-    }
 
     /**
      * 전체 조회
@@ -83,4 +82,7 @@ public class FoodMenuService {
         foodMenuRepository.delete(foodMenu);
     }
 
+    public List<FoodMenu> findAllByRestaurantId(String restaurantId) {
+        return foodMenuRepository.findAllByRestaurantId(restaurantId);
+    }
 }

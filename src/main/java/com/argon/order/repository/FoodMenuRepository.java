@@ -10,4 +10,6 @@ import java.util.List;
 public interface FoodMenuRepository extends JpaRepository<FoodMenu, Long> {
 
     Page<FoodMenu> findByRestaurantId(Pageable pageable, String restaurantId);
+
+    List<FoodMenu> findAllByRestaurantId(String restaurantId);
 }
