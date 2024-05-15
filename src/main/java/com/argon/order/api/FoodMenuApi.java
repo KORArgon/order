@@ -19,7 +19,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v2")
-public class FoodMenuApiController {
+public class FoodMenuApi {
 
     // foodMenuService
     private final FoodMenuService foodMenuService;
