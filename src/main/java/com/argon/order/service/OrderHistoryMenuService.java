@@ -53,7 +53,7 @@ public class OrderHistoryMenuService {
      * @param orderId
      */
     @Transactional
-    public void orderHistoryMenuDelete(String orderId) {
+    public void deleteByOrderId(String orderId) {
         orderHistoryMenuRepository.deleteByOrderId(orderId);
     }
     

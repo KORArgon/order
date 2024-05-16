@@ -5,8 +5,12 @@ import com.argon.order.domain.OrderHistoryMenu;
 import com.argon.order.service.OrderHistoryMenuService;
 import com.argon.order.service.OrderHistoryService;
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,7 +34,13 @@ public class OrderHistoryApi {
             orderHistoryMenu.setOrderCnt(orderCnt[i]);
             orderHistoryMenuService.save(orderHistoryMenu);
         }
-        return ResponseEntity.ok(orderHistoryMenuService);
+
+        JSONObject jsonObject = new JSONObject();
+        Map<String, String> mapHeader = new HashMap<>();
+
+        mapHeader.put("result","성공");
+        jsonObject.put("header", mapHeader);
+        return ResponseEntity.ok(jsonObject);
     }
 
     @PutMapping("/order-history")
@@ -44,15 +54,28 @@ public class OrderHistoryApi {
             orderHistoryMenu.setOrderCnt(orderCnt[i]);
             orderHistoryMenuService.save(orderHistoryMenu);
         }
-        return ResponseEntity.ok(orderHistoryMenuService);
+
+        JSONObject jsonObject = new JSONObject();
+        Map<String, String> mapHeader = new HashMap<>();
+
+        mapHeader.put("result","성공");
+        jsonObject.put("header", mapHeader);
+        return ResponseEntity.ok(jsonObject);
     }
 
     @DeleteMapping("/order-history")
-    public ResponseEntity<Object> orderHistoryDelete(OrderHistory orderHistory){
+    public ResponseEntity<Object> orderHistoryDelete(String orderId){
 
+        orderHistoryMenuService.deleteByOrderId(orderId);
+        orderHistoryService.deleteByOrderId(orderId);
 
+        JSONObject jsonObject = new JSONObject();
+        Map<String, String> mapHeader = new HashMap<>();
 
-        return ResponseEntity.ok(orderHistoryMenuService);
+        mapHeader.put("result","성공");
+        jsonObject.put("header", mapHeader);
+
+        return ResponseEntity.ok(jsonObject);
     }
 
 }

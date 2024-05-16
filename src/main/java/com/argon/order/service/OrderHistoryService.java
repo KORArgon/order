@@ -63,11 +63,11 @@ public class OrderHistoryService {
 
     /**
      * 삭제 처리
-     * @param orderHistory
+     * @param orderId
      */
     @Transactional
-    public void orderHistoryDelete(OrderHistory orderHistory) {
-        orderHistoryRepository.delete(orderHistory);
+    public void deleteByOrderId(String orderId) {
+        orderHistoryRepository.deleteByOrderId(orderId);
     }
 
     public List<Object> selectOrderHistoryMenuList(String orderId) {

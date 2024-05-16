@@ -21,4 +21,6 @@ public interface OrderHistoryRepository extends JpaRepository<OrderHistory, Long
             "LEFT JOIN FoodMenu fm ON ohm.foodMenuNo = fm.foodMenuNo " +
             "WHERE ohm.orderId = :orderId ORDER BY ohm.orderHistoryMenuNo")
     List<Object> selectOrderHistoryMenuList(@Param("orderId") String orderId);
+
+    void deleteByOrderId(String orderId);
 }
