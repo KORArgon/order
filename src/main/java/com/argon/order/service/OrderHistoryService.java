@@ -49,7 +49,7 @@ public class OrderHistoryService {
      * @param orderHistory
      */
     public void save(OrderHistory orderHistory) {
-        if(orderHistoryRepository.findByOrderHistoryNo(orderHistory.getOrderHistoryNo()) == null){
+        if(orderHistoryRepository.findByOrderId(orderHistory.getOrderId()) == null){
             orderHistory.setRegistDate(DateUtil.getTodateTime());
             orderHistory.setRegistId(LoginUtil.getLoingId());
         }   else {

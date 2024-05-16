@@ -11,11 +11,7 @@ import lombok.Setter;
 public class OrderHistory {
 
     @Id
-    @Column(name = "ORDER_HISTORY_NO", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderHistoryNo;
-
-    @Column(name = "ORDER_ID", columnDefinition = "VARCHAR(200)", nullable = false)
+    @Column(name = "ORDER_ID", nullable = false)
     private String orderId;
 
     @Column(name = "RESTAURANT_ID", columnDefinition = "VARCHAR(100)", nullable = false)

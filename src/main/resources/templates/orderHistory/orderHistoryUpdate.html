@@ -11,11 +11,7 @@
 <div class="container">
     <h2>주문내역 수정</h2>
     <form id="orderHistoryUpdateForm" name="orderHistoryUpdateForm" th:action="@{./orderHistoryUpdate}" th:method="put">
-        <input type="hidden" name="orderHistoryNo" id="orderHistoryNo" th:value="${orderHistory.orderHistoryNo}">
-        <div class="form-group">
-            <label for="orderId">주문ID:</label>
-            <input type="text" name="orderId" id="orderId" th:value="${orderHistory.orderId}" required>
-        </div>
+        <input type="hidden" name="orderId" id="orderId" th:value="${orderHistory.orderId}">
         <div class="form-group">
             <label for="restaurantId">식당ID:</label>
             <input type="text" name="restaurantId" id="restaurantId" th:value="${orderHistory.restaurantId}" required>

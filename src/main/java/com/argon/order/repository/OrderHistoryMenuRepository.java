@@ -5,8 +5,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface OrderHistoryMenuRepository extends JpaRepository<OrderHistoryMenu, Long> {
-    OrderHistoryMenu findByOrderId(String id);
+    List<OrderHistoryMenu> findByOrderId(String id);
 
     Page<OrderHistoryMenu> findByOrderId(Pageable pageable, String restaurantId);
 
