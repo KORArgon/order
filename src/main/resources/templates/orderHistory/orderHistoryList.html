@@ -52,16 +52,14 @@
     </div>
     <div class="pagination">
         <a th:href="@{/orderHistoryListForm(page=0)}">최초페이지</a>
-        <th:block th:if="${nowPage != 1}"><a th:href="@{/orderHistoryListForm(page=${nowPage-2})}">이전페이지</a></th:block>
-        <th:block th:if="${nowPage == 1}"><a th:href="@{/orderHistoryListForm(page=0)}">이전페이지</a></th:block>
+        <a th:href="@{/orderHistoryListForm(page=${nowPage-2})}" th:if="${nowPage != 1}">이전페이지</a>
+        <a th:href="@{/orderHistoryListForm(page=0)}" th:if="${nowPage == 1}">이전페이지</a>
         <th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
-            <th:block th:if="${endPage >= nowPage }">
-                <a th:if="${page != nowPage}" th:href="@{/orderHistoryListForm(page=${page-1})}" th:text ="${page}"></a>
-                <strong th:if="${page==nowPage}" th:text ="${page}"></strong>
-            </th:block>
+            <a th:if="${page != nowPage and endPage >= nowPage}" th:href="@{/orderHistoryListForm(page=${page-1})}" th:text ="${page}"></a>
+            <strong th:if="${page==nowPage and endPage >= nowPage}" th:text ="${page}"></strong>
         </th:block>
-        <th:block th:if="${nowPage != totalPages}"><a th:href="@{/orderHistoryListForm(page=${nowPage})}">다음페이지</a></th:block>
-        <th:block th:if="${nowPage == totalPages}"><a th:href="@{/orderHistoryListForm(page=${totalPages-1})}">다음페이지</a></th:block>
+        <a th:if="${nowPage != totalPages}" th:href="@{/orderHistoryListForm(page=${nowPage})}">다음페이지</a>
+        <a th:if="${nowPage == totalPages}" th:href="@{/orderHistoryListForm(page=${totalPages-1})}">다음페이지</a>
         <a th:href="@{/orderHistoryListForm(page=${totalPages-1})}">마지막페이지</a>
     </div>
 </div>
