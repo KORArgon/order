@@ -1,18 +1,17 @@
 package com.argon.order.api;
 
+import com.argon.order.domain.FoodMenu;
 import com.argon.order.domain.OrderHistory;
 import com.argon.order.domain.OrderHistoryMenu;
 import com.argon.order.service.OrderHistoryMenuService;
 import com.argon.order.service.OrderHistoryService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -48,7 +47,7 @@ public class OrderHistoryApi {
             mapHeader.put("result","성공");
             jsonObject.put("header", mapHeader);
 
-            Map<String, Object> mapBody = new HashMap<>();
+            LinkedHashMap<String, Object> mapBody = new LinkedHashMap<>();
 
             mapBody.put("orderId",orderHistory.getOrderId());
             mapBody.put("restaurantId",orderHistory.getRestaurantId());
@@ -56,11 +55,22 @@ public class OrderHistoryApi {
             mapBody.put("registDate",orderHistory.getRegistDate());
 
             JSONObject jsonObjectBody;
-
-            for(Object orderHistoryMenu : orderHistoryMenuList){
-
+            List<Map<String, Object>> mapList = new ArrayList<>();
+            Object[] objects;
+            OrderHistoryMenu orderHistoryMenu;
+            FoodMenu foodMenu;
+            for(Object object : orderHistoryMenuList){
+                jsonObjectBody = new JSONObject();
+                objects = (Object[]) object;
+                orderHistoryMenu = (OrderHistoryMenu) objects[0];
+                foodMenu = (FoodMenu) objects[1];
+                jsonObjectBody.put("foodMenuNo", orderHistoryMenu.getFoodMenuNo());
+                jsonObjectBody.put("orderCnt", orderHistoryMenu.getOrderCnt());
+                jsonObjectBody.put("foodMenuNm", foodMenu.getFoodMenuNm());
+                jsonObjectBody.put("foodMenuPrice", foodMenu.getFoodMenuPrice());
+                mapList.add(jsonObjectBody);
             }
-
+            mapBody.put("menu",mapList);
             jsonObject.put("body", mapBody);
         }
 
