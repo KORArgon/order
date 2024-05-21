@@ -85,10 +85,11 @@ public class OrderHistoryController {
         orderHistoryService.save(orderHistory);
         OrderHistoryMenu orderHistoryMenu;
         for(int i=0; i<foodMenuNo.length; i++){
-            orderHistoryMenu = new OrderHistoryMenu();
-            orderHistoryMenu.setOrderId(orderHistory.getOrderId());
-            orderHistoryMenu.setFoodMenuNo(foodMenuNo[i]);
-            orderHistoryMenu.setOrderCnt(orderCnt[i]);
+            orderHistoryMenu = OrderHistoryMenu.builder()
+                    .orderId(orderHistory.getOrderId())
+                    .foodMenuNo(foodMenuNo[i])
+                    .orderCnt(orderCnt[i])
+                    .build();
             orderHistoryMenuService.save(orderHistoryMenu);
         }
 
@@ -121,11 +122,12 @@ public class OrderHistoryController {
         orderHistoryService.save(orderHistory);
         OrderHistoryMenu orderHistoryMenu;
         for(int i=0; i<foodMenuNo.length; i++){
-            orderHistoryMenu = new OrderHistoryMenu();
-            orderHistoryMenu.setOrderHistoryMenuNo(orderHistoryMenuNo[i]);
-            orderHistoryMenu.setOrderId(orderHistory.getOrderId());
-            orderHistoryMenu.setFoodMenuNo(foodMenuNo[i]);
-            orderHistoryMenu.setOrderCnt(orderCnt[i]);
+            orderHistoryMenu = OrderHistoryMenu.builder()
+                    .orderHistoryMenuNo(orderHistoryMenuNo[i])
+                    .orderId(orderHistory.getOrderId())
+                    .foodMenuNo(foodMenuNo[i])
+                    .orderCnt(orderCnt[i])
+                    .build();
             orderHistoryMenuService.save(orderHistoryMenu);
         }
         return messageService.redirectMessage(model, "수정을 완료했습니다.", "/orderHistoryListForm");

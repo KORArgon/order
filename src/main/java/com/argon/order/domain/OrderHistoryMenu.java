@@ -1,12 +1,13 @@
 package com.argon.order.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Entity
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder(builderMethodName = "orderHistoryMenuBuilder")
+@ToString
 @Getter
-@Setter
+@Entity
 @Table(name="NT_ORDER_HISTORY_MENU")
 public class OrderHistoryMenu {
 
@@ -23,5 +24,13 @@ public class OrderHistoryMenu {
 
     @Column(name = "ORDER_CNT", columnDefinition = "INT", nullable = false)
     private int orderCnt;
+
+    public OrderHistoryMenu() {
+
+    }
+
+    public static OrderHistoryMenuBuilder builder(){
+        return orderHistoryMenuBuilder();
+    }
 
 }

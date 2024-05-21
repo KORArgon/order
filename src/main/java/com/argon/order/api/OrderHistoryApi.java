@@ -83,10 +83,11 @@ public class OrderHistoryApi {
         orderHistoryService.save(orderHistory);
         OrderHistoryMenu orderHistoryMenu;
         for(int i=0; i<foodMenuNo.length; i++){
-            orderHistoryMenu = new OrderHistoryMenu();
-            orderHistoryMenu.setOrderId(orderHistory.getOrderId());
-            orderHistoryMenu.setFoodMenuNo(foodMenuNo[i]);
-            orderHistoryMenu.setOrderCnt(orderCnt[i]);
+            orderHistoryMenu = OrderHistoryMenu.builder()
+                    .orderId(orderHistory.getOrderId())
+                    .foodMenuNo(foodMenuNo[i])
+                    .orderCnt(orderCnt[i])
+                    .build();
             orderHistoryMenuService.save(orderHistoryMenu);
         }
 
@@ -104,10 +105,11 @@ public class OrderHistoryApi {
         OrderHistoryMenu orderHistoryMenu;
         orderHistoryMenuService.deleteByOrderId(orderHistory.getOrderId());
         for(int i=0; i<foodMenuNo.length; i++){
-            orderHistoryMenu = new OrderHistoryMenu();
-            orderHistoryMenu.setOrderId(orderHistory.getOrderId());
-            orderHistoryMenu.setFoodMenuNo(foodMenuNo[i]);
-            orderHistoryMenu.setOrderCnt(orderCnt[i]);
+            orderHistoryMenu = OrderHistoryMenu.builder()
+                    .orderId(orderHistory.getOrderId())
+                    .foodMenuNo(foodMenuNo[i])
+                    .orderCnt(orderCnt[i])
+                    .build();
             orderHistoryMenuService.save(orderHistoryMenu);
         }
 
