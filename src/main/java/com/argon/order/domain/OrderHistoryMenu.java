@@ -5,9 +5,8 @@ import lombok.*;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(builderMethodName = "orderHistoryMenuBuilder")
-@ToString
-@Getter
 @Entity
+@Data
 @Table(name="NT_ORDER_HISTORY_MENU")
 public class OrderHistoryMenu {
 

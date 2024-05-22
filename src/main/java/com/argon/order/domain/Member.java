@@ -1,12 +1,12 @@
 package com.argon.order.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder(builderMethodName = "memberBuilder")
 @Entity
-@Getter
-@Setter
+@Data
 @Table(name="NT_MEMBER")
 public class Member {
 
@@ -35,4 +35,11 @@ public class Member {
     @Column(name = "UPDATE_ID", columnDefinition = "VARCHAR(20)", insertable=false)
     private String updateId;
 
+    public Member() {
+
+    }
+
+    public static MemberBuilder builder(){
+        return memberBuilder();
+    }
 }

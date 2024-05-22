@@ -63,30 +63,38 @@ public class MemberService implements UserDetailsService {
      */
     @Transactional
     public boolean save(Member member, Principal principal, String insertAndUpdateAt) {
-        Member checkUser = new Member();
         if(insertAndUpdateAt.equals("insert")){
-            checkUser.setMemberId(member.getMemberId());
-
             if (memberRepository.findByMemberId(member.getMemberId()) != null){
                 return false;
             }
-            Member insertMember = new Member();
-            insertMember.setMemberId(member.getMemberId());
-            insertMember.setPassword(passwordEncoder.encode(member.getPassword()));
-            insertMember.setName(member.getName());
-            insertMember.setGrade(member.getGrade());
-            insertMember.setRegistDate(DateUtil.getTodateTime());
-            if(principal.getName() == null) insertMember.setRegistId(member.getMemberId());
-            else insertMember.setRegistId(principal.getName());
+
+            String registId = principal.getName() != null ? principal.getName() : member.getMemberId();
+
+            Member insertMember = Member.builder()
+                    .memberId(member.getMemberId())
+                    .password(passwordEncoder.encode(member.getPassword()))
+                    .name(member.getName())
+                    .grade(member.getGrade())
+                    .registDate(DateUtil.getTodateTime())
+                    .registId(registId)
+                    .build();
+
             memberRepository.save(insertMember);
         }
         if(insertAndUpdateAt.equals("update")){
-            checkUser = memberRepository.findByMemberId(member.getMemberId());
-            if(member.getPassword().isEmpty()) member.setPassword(checkUser.getPassword());
-            else member.setPassword(passwordEncoder.encode(member.getPassword()));
-            member.setUpdateDate(DateUtil.getTodateTime());
-            member.setUpdateId(LoginUtil.getLoingId());
-            memberRepository.save(member);
+            Member checkUser = memberRepository.findByMemberId(member.getMemberId());
+            String password = member.getPassword().isEmpty() ? checkUser.getPassword() : passwordEncoder.encode(member.getPassword());
+
+            Member updateMember = Member.builder()
+                    .memberId(member.getMemberId())
+                    .password(password)
+                    .name(member.getName())
+                    .grade(member.getGrade())
+                    .updateDate(DateUtil.getTodateTime())
+                    .updateId(LoginUtil.getLoingId())
+                    .build();
+
+            memberRepository.save(updateMember);
         }
 
 
