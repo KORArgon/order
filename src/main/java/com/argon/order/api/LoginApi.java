@@ -36,22 +36,22 @@ public class LoginApi {
 
 
         if(restaurantId.isEmpty() || memberId.isEmpty() || password.isEmpty()){
-            mapHeader.put("result","실패");
-            mapHeader.put("message", "파라미터값을 확인해주세요.");
+            mapHeader.put("result","fail");
+            mapHeader.put("message", "check parameters");
             jsonObject.put("header", mapHeader);
         }
         else if (!memberCheck) {
-            mapHeader.put("result","실패");
-            mapHeader.put("message", "사용자ID 또는 패스워드를 확인해주세요.");
+            mapHeader.put("result","fail");
+            mapHeader.put("message", "please give me your userId or password");
             jsonObject.put("header", mapHeader);
         }
         else if(restaurant == null){
-            mapHeader.put("result","실패");
-            mapHeader.put("message", "사용자ID 또는 식당ID를 확인해주세요.");
+            mapHeader.put("result","fail");
+            mapHeader.put("message", "please give me your userId or restaurantId");
             jsonObject.put("header", mapHeader);
         }
         else{
-            mapHeader.put("result","성공");
+            mapHeader.put("result","success");
             jsonObject.put("header", mapHeader);
 
             mapBody.put("tableNo", tableNo);

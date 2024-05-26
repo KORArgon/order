@@ -33,17 +33,17 @@ public class OrderHistoryApi {
         List<Object> orderHistoryMenuList = orderHistoryService.selectOrderHistoryMenuList(orderId);
 
         if (orderId == null || orderId.isEmpty()){
-            mapHeader.put("result","실패");
-            mapHeader.put("message", "id값이 없습니다.");
+            mapHeader.put("result","fail");
+            mapHeader.put("message", "no id");
             jsonObject.put("header", mapHeader);
         }
         else if(orderHistory == null){
-            mapHeader.put("result","실패");
-            mapHeader.put("message", "주문내역이 없습니다.");
+            mapHeader.put("result","fail");
+            mapHeader.put("message", "no order details");
             jsonObject.put("header", mapHeader);
         }
         else {
-            mapHeader.put("result","성공");
+            mapHeader.put("result","success");
             jsonObject.put("header", mapHeader);
 
             LinkedHashMap<String, Object> mapBody = new LinkedHashMap<>();
@@ -94,7 +94,7 @@ public class OrderHistoryApi {
         JSONObject jsonObject = new JSONObject();
         Map<String, String> mapHeader = new HashMap<>();
 
-        mapHeader.put("result","성공");
+        mapHeader.put("result","success");
         jsonObject.put("header", mapHeader);
         return ResponseEntity.ok(jsonObject);
     }
@@ -116,7 +116,7 @@ public class OrderHistoryApi {
         JSONObject jsonObject = new JSONObject();
         Map<String, String> mapHeader = new HashMap<>();
 
-        mapHeader.put("result","성공");
+        mapHeader.put("result","success");
         jsonObject.put("header", mapHeader);
         return ResponseEntity.ok(jsonObject);
     }
@@ -130,7 +130,7 @@ public class OrderHistoryApi {
         JSONObject jsonObject = new JSONObject();
         Map<String, String> mapHeader = new HashMap<>();
 
-        mapHeader.put("result","성공");
+        mapHeader.put("result","success");
         jsonObject.put("header", mapHeader);
 
         return ResponseEntity.ok(jsonObject);

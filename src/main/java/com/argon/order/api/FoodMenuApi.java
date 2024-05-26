@@ -36,22 +36,22 @@ public class FoodMenuApi {
         Restaurant restaurant = restaurantService.findByRestaurantId(id);
         // header 값 설정
         if(id == null || id == ""){
-            mapHeader.put("result","실패");
-            mapHeader.put("message", "id값이 없습니다.");
+            mapHeader.put("result","fail");
+            mapHeader.put("message", "no id");
             jsonObject.put("header", mapHeader);
         }
         else if(restaurant == null){
-            mapHeader.put("result","실패");
-            mapHeader.put("message", "식당이 없습니다.");
+            mapHeader.put("result","fail");
+            mapHeader.put("message", "no restaurant");
             jsonObject.put("header", mapHeader);
         }
         else if (list.size()==0) {
-            mapHeader.put("result","실패");
-            mapHeader.put("message", "메뉴가 없습니다.");
+            mapHeader.put("result","fail");
+            mapHeader.put("message", "no menu");
             jsonObject.put("header", mapHeader);
         }
         else{
-            mapHeader.put("result","성공");
+            mapHeader.put("result","success");
             jsonObject.put("header", mapHeader);
 
             List<Map<String, Object>> mapList = new ArrayList<>();
