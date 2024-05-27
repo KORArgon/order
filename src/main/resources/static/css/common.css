@@ -231,3 +231,58 @@ button:hover {
 .radio-label input[type="radio"]:checked + ::before {
     background-color: #007bff;
 }
+
+
+/* 이미지 게시판 */
+.image-board-container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.image-board h2 {
+    text-align: center;
+    color: #333;
+}
+
+.image-board {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.image-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    width: calc(20% - 20px); /* Three images per row with gap */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.image-card:hover {
+    transform: scale(1.05);
+}
+
+.image-card img {
+    width: 100%;
+    height: 100px; /* 고정된 높이 */
+    object-fit: cover; /* 이미지가 카드에 맞게 잘리도록 설정 */
+    display: block;
+}
+
+.image-card h3 {
+    margin: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.image-card p {
+    margin: 0 10px 10px 10px;
+    color: #666;
+}

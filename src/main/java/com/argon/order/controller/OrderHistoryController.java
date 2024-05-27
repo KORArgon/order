@@ -2,9 +2,11 @@ package com.argon.order.controller;
 
 import com.argon.order.domain.OrderHistory;
 import com.argon.order.domain.OrderHistoryMenu;
+import com.argon.order.service.FoodMenuService;
 import com.argon.order.service.MessageService;
 import com.argon.order.service.OrderHistoryMenuService;
 import com.argon.order.service.OrderHistoryService;
+import com.argon.order.util.LoginUtil;
 import com.argon.order.util.PagingUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +32,9 @@ public class OrderHistoryController {
 
     // orderHistoryMenuService
     private final OrderHistoryMenuService orderHistoryMenuService;
+
+    // foodMenuService
+    private final FoodMenuService foodMenuService;
 
     // messageService
     private final MessageService messageService;
@@ -68,7 +73,8 @@ public class OrderHistoryController {
      * @return
      */
     @GetMapping("/orderHistoryRegistForm")
-    public String orderHistoryRegistForm(){
+    public String orderHistoryRegistForm(HttpServletRequest request, Model model){
+        model.addAttribute("foodMenuList",foodMenuService.findAllByRestaurantId(LoginUtil.getRestaurantId(request)));
         return "orderHistory/orderHistoryRegist";
     }
 
@@ -103,11 +109,12 @@ public class OrderHistoryController {
      * @return
      */
     @GetMapping("/orderHistoryUpdateForm")
-    public String orderHistoryUpdateForm(OrderHistory orderHistory, Model model){
+    public String orderHistoryUpdateForm(OrderHistory orderHistory, Model model, HttpServletRequest request){
         OrderHistory result = orderHistoryService.findByOrderId(orderHistory.getOrderId());
         model.addAttribute("orderHistory", result);
         List<Object> orderHistoryMenuList = orderHistoryService.selectOrderHistoryMenuList(orderHistory.getOrderId());
         model.addAttribute("orderHistoryMenuList", orderHistoryMenuList);
+        model.addAttribute("foodMenuList",foodMenuService.findAllByRestaurantId(LoginUtil.getRestaurantId(request)));
         return "orderHistory/orderHistoryUpdate";
     }
 
@@ -121,9 +128,9 @@ public class OrderHistoryController {
     public String orderHistoryUpdate(OrderHistory orderHistory, Model model,Long[] orderHistoryMenuNo, int[] foodMenuNo, int[] orderCnt){
         orderHistoryService.save(orderHistory);
         OrderHistoryMenu orderHistoryMenu;
+        orderHistoryMenuService.deleteByOrderId(orderHistory.getOrderId());
         for(int i=0; i<foodMenuNo.length; i++){
             orderHistoryMenu = OrderHistoryMenu.builder()
-                    .orderHistoryMenuNo(orderHistoryMenuNo[i])
                     .orderId(orderHistory.getOrderId())
                     .foodMenuNo(foodMenuNo[i])
                     .orderCnt(orderCnt[i])

@@ -12,29 +12,84 @@
     <h2>주문내역 수정</h2>
     <form id="orderHistoryUpdateForm" name="orderHistoryUpdateForm" th:action="@{./orderHistoryUpdate}" th:method="put">
         <input type="hidden" name="orderId" id="orderId" th:value="${orderHistory.orderId}">
-        <div class="form-group">
-            <label for="restaurantId">식당ID:</label>
-            <input type="text" name="restaurantId" id="restaurantId" th:value="${orderHistory.restaurantId}" required>
-        </div>
+        <input type="hidden" name="restaurantId" id="restaurantId" th:value="${commonMap.restaurantId}">
         <div class="form-group">
             <label for="tableNo">테이블 번호:</label>
             <input type="text" name="tableNo" id="tableNo" th:value="${orderHistory.tableNo}" required>
         </div>
+        <div class="image-board-container">
+            <h2>메뉴 목록</h2>
+            <div class="image-board">
+                <div class="image-card" th:each="foodMenu, status : ${foodMenuList}" th:onclick="menuAdd([[${foodMenu.foodMenuNo}]],[[${foodMenu.foodMenuNm}]],[[${foodMenu.foodMenuPrice}]])">
+                    <img th:src="${@environment.getProperty('order.upload.path')}+${foodMenu.foodImgPath}+${foodMenu.foodImgStoreName}" th:alt="${foodMenu.foodImgName}">
+                    <h3 th:text="${foodMenu.foodMenuNm}"></h3>
+                    <p th:text="${foodMenu.foodMenuPrice}+'원'"></p>
+                </div>
+            </div>
+        </div>
+        <h2>주문목록</h2>
         <p>=====================================================================</p>
-        <th:block th:each="orderHistoryMenu, status : ${orderHistoryMenuList}">
-            <input type="hidden" name="orderHistoryMenuNo" id="orderHistoryMenuNo" th:value="${orderHistoryMenu[0].orderHistoryMenuNo}">
-            <div class="form-group">
-                <label for="foodMenuNo1">메뉴 번호1:</label>
-                <input type="text" name="foodMenuNo" id="foodMenuNo1" th:value="${orderHistoryMenu[1].foodMenuNo}" required>
-            </div>
-            <div class="form-group">
-                <label for="orderCnt1">메뉴 수량1:</label>
-                <input type="text" name="orderCnt" id="orderCnt1" th:value="${orderHistoryMenu[0].orderCnt}" required>
-            </div>
-            <p>=====================================================================</p>
-        </th:block>
+        <div id="standardDiv">
+            <th:block th:each="orderHistoryMenu, status : ${orderHistoryMenuList}">
+                <div th:id="addDiv+${orderHistoryMenu[0].foodMenuNo}">
+                    <div>메뉴명 : [[${orderHistoryMenu[1].foodMenuNm}]]</div>
+                    <div>수량 : <button type="button" th:onclick="cntDown([[${orderHistoryMenu[0].foodMenuNo}]])">-</button> <span th:id="addCnt+${orderHistoryMenu[0].foodMenuNo}">[[${orderHistoryMenu[0].orderCnt}]]</span> <button type="button" th:onclick="cntUp([[${orderHistoryMenu[0].foodMenuNo}]])">+</button></div>
+                    <input type="hidden" th:id="foodMenuNo+${orderHistoryMenu[0].foodMenuNo}" name="foodMenuNo" th:value="${orderHistoryMenu[0].foodMenuNo}"/>
+                    <input type="hidden" th:id="orderCnt+${orderHistoryMenu[0].foodMenuNo}" name="orderCnt" th:value="${orderHistoryMenu[0].orderCnt}"/>
+                    <button type="button" th:onclick="orderRemove([[${orderHistoryMenu[0].foodMenuNo}]])">삭제</button>
+                    <p>=====================================================================</p>
+                </div>
+            </th:block>
+        </div>
         <button class="button-normal" type="submit">수정</button>
     </form>
 </div>
+<script>
+    function menuAdd(no, name){
+        var standardDiv = document.getElementById('standardDiv');
+        var addDiv = document.getElementById('addDiv'+no);
+        var addCnt = document.getElementById('addCnt'+no);
+        var orderCntId = document.getElementById('orderCnt'+no);
+        var addHtml = '';
+        if(addDiv == null){
+            addHtml += '<div id="addDiv'+no+'">';
+            addHtml += '<div>'+'메뉴명 : '+name+'</div>';
+            addHtml += '<div>수량 : <button type="button" onclick="cntDown('+no+')">-</button> <span id="addCnt'+no+'">1</span> <button type="button" onclick="cntUp('+no+')">+</button></div>';
+            addHtml += '<input type="hidden" id="foodMenuNo'+no+'" name="foodMenuNo" value="'+no+'"/>';
+            addHtml += '<input type="hidden" id="orderCnt'+no+'" name="orderCnt" value="1"/>'
+            addHtml += '<button type="button" onclick="orderRemove('+no+')">삭제</button>'
+            addHtml +='<p>=====================================================================</p>';
+            addHtml += '</div>'
+            standardDiv.innerHTML += addHtml;
+        } else {
+            var cnt = parseInt(addCnt.innerHTML);
+            addCnt.innerText = cnt+1;
+            orderCntId.value = cnt+1;
+        }
+    }
+    function cntUp(no){
+        var addCnt = document.getElementById('addCnt'+no);
+        var orderCntId = document.getElementById('orderCnt'+no);
+        var cnt = parseInt(addCnt.innerHTML);
+        addCnt.innerText = cnt+1;
+        orderCntId.value = cnt+1;
+    }
+    function cntDown(no){
+        var addDiv = document.getElementById('addDiv'+no);
+        var addCnt = document.getElementById('addCnt'+no);
+        var orderCntId = document.getElementById('orderCnt'+no);
+        var cnt = parseInt(addCnt.innerHTML);
+        if(cnt > 1){
+            addCnt.innerText = cnt-1;
+            orderCntId.value = cnt-1;
+        } else {
+            addDiv.remove();
+        }
+    }
+    function orderRemove(no){
+        var addDiv = document.getElementById('addDiv'+no);
+        addDiv.remove();
+    }
+</script>
 </body>
 </html>
