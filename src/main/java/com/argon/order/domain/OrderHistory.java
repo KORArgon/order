@@ -1,12 +1,14 @@
 package com.argon.order.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@Builder(builderMethodName = "orderHistoryBuilder", toBuilder = true)
 @Entity
+//@Data
 @Getter
-@Setter
 @Table(name="NT_ORDER_HISTORY")
 public class OrderHistory {
 
@@ -32,4 +34,8 @@ public class OrderHistory {
     @Column(name = "UPDATE_ID", columnDefinition = "VARCHAR(20)", insertable=false)
     private String updateId;
 
+    public static OrderHistory.OrderHistoryBuilder builder(){
+        return orderHistoryBuilder();
+    }
+    
 }

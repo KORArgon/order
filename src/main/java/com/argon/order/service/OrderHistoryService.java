@@ -1,7 +1,6 @@
 package com.argon.order.service;
 
 import com.argon.order.domain.OrderHistory;
-import com.argon.order.domain.OrderHistoryMenu;
 import com.argon.order.repository.OrderHistoryRepository;
 import com.argon.order.util.DateUtil;
 import com.argon.order.util.LoginUtil;
@@ -50,11 +49,15 @@ public class OrderHistoryService {
      */
     public void save(OrderHistory orderHistory) {
         if(orderHistoryRepository.findByOrderId(orderHistory.getOrderId()) == null){
-            orderHistory.setRegistDate(DateUtil.getTodateTime());
-            orderHistory.setRegistId(LoginUtil.getLoingId());
-        }   else {
-            orderHistory.setUpdateDate(DateUtil.getTodateTime());
-            orderHistory.setUpdateId(LoginUtil.getLoingId());
+            orderHistory = orderHistory.toBuilder()
+                    .registDate(DateUtil.getTodateTime())
+                    .registId(LoginUtil.getLoingId())
+                    .build();
+        } else {
+            orderHistory = orderHistory.toBuilder()
+                    .updateDate(DateUtil.getTodateTime())
+                    .updateId(LoginUtil.getLoingId())
+                    .build();
         }
 
         orderHistoryRepository.save(orderHistory);
