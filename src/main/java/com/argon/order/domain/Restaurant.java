@@ -7,8 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder(builderMethodName = "orderHistoryBuilder", toBuilder = true)
 @Entity
-//@Data
-@Getter
+@Data
 @Table(name="NT_RESTAURANT")
 public class Restaurant {
 
