@@ -44,19 +44,26 @@ public class RestaurantService {
      * @param restaurant
      */
     public void save(Restaurant restaurant) {
-        restaurant.setMemberId(LoginUtil.getLoingId());
+        restaurant = restaurant.toBuilder()
+                .memberId(LoginUtil.getLoingId())
+                .build();
+
         if(restaurant.getRestaurantNo() == null){
             StringBuffer sb = new StringBuffer();
             if(LoginUtil.getLoginIsAdmin()) sb.append("A");
             if(!LoginUtil.getLoginIsAdmin()) sb.append("B");
             sb.append(DateUtil.getTodateTime());
             sb.append(String.format("%04d",restaurantRepository.selectRestaurantNo()));
-            restaurant.setRestaurantId(sb.toString());
-            restaurant.setRegistDate(DateUtil.getTodateTime());
-            restaurant.setRegistId(LoginUtil.getLoingId());
+            restaurant = restaurant.toBuilder()
+                    .restaurantId(sb.toString())
+                    .registDate(DateUtil.getTodateTime())
+                    .registId(LoginUtil.getLoingId())
+                    .build();
         }   else {
-            restaurant.setUpdateDate(DateUtil.getTodateTime());
-            restaurant.setUpdateId(LoginUtil.getLoingId());
+            restaurant = restaurant.toBuilder()
+                    .updateDate(DateUtil.getTodateTime())
+                    .updateId(LoginUtil.getLoingId())
+                    .build();
         }
 
         restaurantRepository.save(restaurant);
