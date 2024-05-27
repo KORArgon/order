@@ -40,7 +40,7 @@ public class FoodMenuController {
     @GetMapping("/foodMenuListForm")
     public String foodMenuListForm(Model model, HttpServletRequest request,
                                    @PageableDefault(page=0, size=10, sort="foodMenuNo", direction = Sort.Direction.DESC) Pageable pageable){
-//        Page<FoodMenu> foodMenuList = foodMenuService.findAll(pageable);
+
         Page<FoodMenu> foodMenuList = foodMenuService.findByRestaurantId(pageable, LoginUtil.getRestaurantId(request));
         model.addAttribute("totCnt",foodMenuList.getTotalElements());
         model.addAttribute("foodMenuList", foodMenuList);
