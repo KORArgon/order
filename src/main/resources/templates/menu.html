@@ -23,7 +23,8 @@
                 </option>
             </select>
         </div>
-        <span th:text="${commonMap.loginName}">님</span>
+        <th:span th:if="${commonMap.restaurantId ne null}" th:text="${commonMap.restaurantId}+' | '"></th:span>
+        <span th:text="${commonMap.loginName}">님</span> |
         <a href="/logout">Logout</a>
     </div>
 </div>
