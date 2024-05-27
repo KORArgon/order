@@ -1,12 +1,13 @@
 package com.argon.order.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@Builder(builderMethodName = "foodMenuBuilder", toBuilder = true)
 @Entity
-@Getter
-@Setter
+@Data
 @Table(name="NT_FOOD_MENU")
 public class FoodMenu {
 
@@ -54,4 +55,7 @@ public class FoodMenu {
     @Column(name = "UPDATE_ID", columnDefinition = "VARCHAR(20)")
     private String updateId;
 
+    public static FoodMenu.FoodMenuBuilder builder(){
+        return foodMenuBuilder();
+    }
 }

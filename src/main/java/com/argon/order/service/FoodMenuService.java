@@ -56,21 +56,28 @@ public class FoodMenuService {
     public void save(FoodMenu foodMenu, MultipartHttpServletRequest request) throws IOException {
         UUID uuid = UUID.randomUUID();
         MultipartFile file = request.getFiles("fileUpload").get(0);
-        foodMenu.setRestaurantId(LoginUtil.getRestaurantId(request));
+        foodMenu = foodMenu.toBuilder()
+                .restaurantId(LoginUtil.getRestaurantId(request))
+                .build();
         if(!Objects.requireNonNull(file.getOriginalFilename()).isEmpty()){
-            foodMenu.setFoodImgName(file.getOriginalFilename());
-            foodMenu.setFoodImgStoreName(DateUtil.getTodateTime()+uuid+"."+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1));
-            foodMenu.setFoodImgPath("foodMenu/");
+            foodMenu = foodMenu.toBuilder()
+                    .foodImgName(file.getOriginalFilename())
+                    .foodImgStoreName(DateUtil.getTodateTime()+uuid+"."+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1))
+                    .foodImgPath("foodMenu/")
+                    .build();
             FileUtil.getFileUploadAtchmnfl(file.getInputStream(), filePath+foodMenu.getFoodImgPath(), foodMenu.getFoodImgStoreName());
         }
         if(foodMenu.getFoodMenuNo() == null || foodMenu.getFoodMenuNo() == 0){
-            foodMenu.setRegistDate(DateUtil.getTodateTime());
-            foodMenu.setRegistId(LoginUtil.getLoingId());
+            foodMenu = foodMenu.toBuilder()
+                    .registDate(DateUtil.getTodateTime())
+                    .registId(LoginUtil.getLoingId())
+                    .build();
         }   else {
-            foodMenu.setUpdateDate(DateUtil.getTodateTime());
-            foodMenu.setUpdateId(LoginUtil.getLoingId());
+            foodMenu = foodMenu.toBuilder()
+                    .updateDate(DateUtil.getTodateTime())
+                    .updateId(LoginUtil.getLoingId())
+                    .build();
         }
-        foodMenu.setRegistId(LoginUtil.getRestaurantId(request));
         foodMenuRepository.save(foodMenu);
     }
 
