@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder(builderMethodName = "memberBuilder")
+@NoArgsConstructor
+@Builder(builderMethodName = "memberBuilder", toBuilder = true)
 @Entity
 @Data
 @Table(name="NT_MEMBER")
@@ -35,11 +36,8 @@ public class Member {
     @Column(name = "UPDATE_ID", columnDefinition = "VARCHAR(20)", insertable=false)
     private String updateId;
 
-    public Member() {
-
-    }
-
-    public static MemberBuilder builder(){
+    public static Member.MemberBuilder builder(){
         return memberBuilder();
     }
+
 }

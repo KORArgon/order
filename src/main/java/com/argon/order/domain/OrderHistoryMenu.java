@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder(builderMethodName = "orderHistoryMenuBuilder")
+@NoArgsConstructor
+@Builder(builderMethodName = "orderHistoryMenuBuilder", toBuilder = true)
 @Entity
 @Data
 @Table(name="NT_ORDER_HISTORY_MENU")
@@ -23,10 +24,6 @@ public class OrderHistoryMenu {
 
     @Column(name = "ORDER_CNT", columnDefinition = "INT", nullable = false)
     private int orderCnt;
-
-    public OrderHistoryMenu() {
-
-    }
 
     public static OrderHistoryMenuBuilder builder(){
         return orderHistoryMenuBuilder();
